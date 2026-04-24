@@ -90,7 +90,7 @@
 
 @section('content')
 <!-- Page Title -->
-<section class="page-title" style="background-image: url({{ asset('assets/front/images/background/11.jpg') }});">
+<section class="page-title" style="background-image: url({{ asset('assets/front/images/background/banner.jpeg') }});">
     <div class="auto-container">
         <h1>Espace Adhérent</h1>
         <ul class="page-breadcrumb">
