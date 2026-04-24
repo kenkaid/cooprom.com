@@ -33,7 +33,7 @@
         </div>
         @if(isset($user) && $user->photo)
             <div class="mt-2">
-                <img src="{{ asset('storage/' . $user->photo) }}" alt="Photo de profil" class="img-thumbnail" style="height: 100px;">
+                <img src="{{ $user->photo }}" alt="Photo de profil" class="img-thumbnail" style="height: 100px;">
             </div>
         @endif
     </div>

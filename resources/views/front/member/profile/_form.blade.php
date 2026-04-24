@@ -2,7 +2,7 @@
     <!-- Photo de profil -->
     <div class="col-12 mb-4 text-center">
         <div class="profile-photo-wrapper position-relative d-inline-block">
-            <img id="photo-preview" src="{{ $user->photo ? asset('storage/'.$user->photo) : asset('assets/admin/images/avatars/avatar-1.png') }}"
+            <img id="photo-preview" src="{{ $user->photo }}"
                  class="rounded-circle border shadow-sm p-1"
                  style="width: 150px; height: 150px; object-fit: cover;" alt="Photo">
             <label for="photo-input" class="btn btn-sm btn_orange text-white position-absolute rounded-circle shadow"

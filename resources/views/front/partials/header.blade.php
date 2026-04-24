@@ -258,7 +258,7 @@
 
                     @auth
                         <div class="user-profile-mobile">
-                            <img src="{{ auth()->user()->photo ? asset('storage/'.auth()->user()->photo) : asset('assets/admin/images/avatars/avatar-1.png') }}" alt="Avatar">
+                            <img src="{{ auth()->user()->photo }}" alt="Avatar">
                             <div class="info">
                                 <h5>{{ auth()->user()->name }} {{ auth()->user()->last_name }}</h5>
                                 <span>{{ auth()->user()->culturalSector->name ?? 'Membre Adhérent' }}</span>

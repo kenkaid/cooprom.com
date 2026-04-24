@@ -40,7 +40,7 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="{{ asset('storage/' . $user->photo) }}" class="rounded-circle" width="44" height="44" alt="" onerror="this.src='{{ asset('assets/admin/images/avatars/avatar-1.png') }}'">
+                                <img src="{{ $user->photo }}" class="rounded-circle" width="44" height="44" alt="" onerror="this.src='{{ asset('assets/admin/images/avatars/avatar-1.png') }}'">
                                 <div class="ms-2">
                                     <h6 class="mb-0">{{ $user->name }} {{ $user->last_name }}</h6>
                                     @if($user->designation)

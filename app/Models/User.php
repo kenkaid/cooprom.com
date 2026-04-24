@@ -89,6 +89,14 @@ class User extends BaseModel
         return $this->hasMany(Production::class);
     }
 
+    public function getPhotoAttribute($value)
+    {
+        if ($value && !str_starts_with($value, 'http')) {
+            return asset('storage/' . $value);
+        }
+        return $value ?: asset('assets/admin/images/avatars/avatar-1.png'); // Image par défaut si vide
+    }
+
     public function visaApplications()
     {
         return $this->hasMany(VisaApplication::class);

@@ -2,7 +2,7 @@
     <div class="inner-column bg-white shadow-sm p-0 rounded-lg overflow-hidden border">
         <div class="user-info text-center p-4 bg-light">
             <div class="image mb-3 position-relative d-inline-block">
-                <img src="{{ auth()->user()->photo ? asset('storage/'.auth()->user()->photo) : asset('assets/admin/images/avatars/avatar-1.png') }}"
+                <img src="{{ auth()->user()->photo }}"
                      class="rounded-circle border border-white shadow-sm"
                      style="width: 100px; height: 100px; object-fit: cover;" alt="Avatar">
                 <a href="{{ route('member.profile.edit') }}" class="btn btn-sm btn-light position-absolute rounded-circle shadow-sm" style="bottom: 0; right: 0; padding: 5px 8px;">
