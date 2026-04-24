@@ -40,7 +40,7 @@
 
                     <!-- Slide 3: Production -->
                     <li data-index="rs-3" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off"  data-easein="default" data-easeout="default" data-masterspeed="300"  data-thumb=""  data-delay="5000"  data-rotate="0"  data-saveperformance="off"  data-title="Production" data-description="">
-                        <img src="{{ asset('assets/front/images/main-slider/slide2.jpg') }}" title="Production Numérique" data-bg="p:center top;" data-parallax="off" class="rev-slidebg" data-no-retina>
+                        <img src="{{ asset('assets/front/images/resource/members/production.jpeg') }}" title="Production Numérique" data-bg="p:center top;" data-parallax="off" class="rev-slidebg" data-no-retina>
                         <div class="tp-caption" data-paddingleft="[15,15,15,15]" data-responsive_offset="on" data-type="text" data-height="none" data-width="['1000','900','750','650']" data-voffset="['-100','-100','-120','-120']" data-x="['left','left','center','center']" data-y="['middle','middle','middle','middle']" data-frames='[{"delay":500,"speed":1500,"frame":"0","from":"y:[-100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;","mask":"x:0px;y:0px;s:inherit;e:inherit;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"auto:auto;","ease":"Power3.easeInOut"}]'>
                             <h2 class="text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8); white-space: nowrap;">PRODUCTION NUMÉRIQUE</h2>
                         </div>

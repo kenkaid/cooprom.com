@@ -3,7 +3,7 @@
 @section('title', 'Mes Productions - COOPROM')
 
 @section('content')
-<section class="page-title" style="background-image: url({{ asset('assets/front/images/background/11.jpg') }});">
+<section class="page-title" style="background-image: url({{ asset('assets/front/images/resource/members/production.jpeg') }});">
     <div class="auto-container">
         <h1>Mes Productions</h1>
         <ul class="page-breadcrumb">

@@ -27,7 +27,7 @@
                 <!-- Content Column -->
                 <div class="content-column col-lg-7 col-md-12 col-sm-12">
                     <div class="inner-column pr-lg-5">
-                        <div class="sec-title-two mb-4">
+                        <div class="sec-title">
                             <span class="title">DEPUIS 2005</span>
                             <h2 class="font-weight-bold">Une coopérative au cœur de la <span class="text-danger">promotion artistique</span></h2>
                         </div>
@@ -68,7 +68,7 @@
                     <div class="inner-column position-relative">
                         <div class="image-box p-3 bg-white shadow-lg rounded">
                             <figure class="image overflow-hidden rounded mb-0">
-                                <img src="{{ asset('assets/front/images/resource/image-2.jpg') }}" alt="COOPROM Equipe" class="img-fluid transform-scale">
+                                <img src="{{ asset('assets/front/images/resource/prez.jpg') }}" alt="COOPROM Equipe" class="img-fluid transform-scale">
                             </figure>
                         </div>
                         <div class="experience-badge bg-red text-white p-4 rounded shadow-lg position-absolute" style="bottom: -30px; left: -30px; z-index: 2;">

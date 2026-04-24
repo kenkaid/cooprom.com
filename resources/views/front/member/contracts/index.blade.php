@@ -4,9 +4,9 @@
 
 @section('content')
 <!-- Page Title -->
-<section class="page-title" style="background-image: url({{ asset('assets/front/images/background/11.jpg') }});">
+<section class="page-title" style="background-image: url({{ asset('assets/front/images/resource/members/contracts.jpeg') }});">
     <div class="auto-container">
-        <h1>Mes Contrats</h1>
+        <h1 class="text-white">Mes Contrats</h1>
         <ul class="page-breadcrumb">
             <li><a href="/">Accueil</a></li>
             <li><a href="{{ route('member.dashboard') }}">Tableau de bord</a></li>

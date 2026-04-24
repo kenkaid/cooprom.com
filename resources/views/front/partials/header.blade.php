@@ -130,8 +130,8 @@
                     <div class="outer-box">
                         <div class="service_wrapper">
                             <span class="icon flaticon-whatsapp"></span>
-                            <p>Have Any Questions?</p>
-                            <h4>0712 819 79 555</h4>
+                            <p>Vous avez des Questions?</p>
+                            <h4>07 12 12 12 12</h4>
                         </div>
 
                         <!-- Search Btn -->
