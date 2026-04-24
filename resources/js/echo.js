@@ -18,14 +18,28 @@ if (window.Echo) {
     if (userId) {
         window.Echo.private(`App.Models.User.${userId}`)
             .notification((notification) => {
-                console.log('Nouvelle notification reçue:', notification);
-
                 // Mettre à jour le compteur
                 const badge = document.getElementById('notification-count');
                 if (badge) {
                     const currentCount = parseInt(badge.innerText) || 0;
                     badge.innerText = currentCount + 1;
                     badge.style.display = 'flex';
+                }
+
+                const icon = notification.icon || 'bi-info-circle-fill';
+                const title = notification.title || 'Notification';
+                const message = notification.message || '';
+                const notifId = notification.id;
+                let url = notification.url || '#';
+
+                // Détecter si on est sur l'admin ou le front
+                const isAdmin = document.querySelector('.wrapper') !== null;
+
+                // Calculer l'URL de redirection
+                if (isAdmin && notifId) {
+                    url = `/cp-admin-access/notifications/${notifId}/read`;
+                } else if (!isAdmin && notifId) {
+                    url = `/mon-espace/notifications/${notifId}/read`;
                 }
 
                 // Ajouter à la liste
@@ -35,17 +49,9 @@ if (window.Echo) {
                     const emptyMsg = list.querySelector('.text-center');
                     if (emptyMsg) emptyMsg.remove();
 
-                    const icon = notification.icon || 'bi-info-circle-fill';
-                    const title = notification.title || 'Notification';
-                    const message = notification.message || '';
-                    const url = notification.url || '#';
-
-                    // Détecter si on est sur l'admin ou le front
-                    const isAdmin = document.querySelector('.wrapper') !== null;
-
                     let newItem = '';
                     if (isAdmin) {
-                        // Structure compatible avec le header admin actuel
+                        // Structure compatible avec le header admin actuel (Bootstrap 5)
                         newItem = `
                             <a class="dropdown-item" href="${url}">
                                 <div class="d-flex align-items-center">
@@ -77,14 +83,20 @@ if (window.Echo) {
 
                 // Optionnel: Afficher un toast/alerte
                 if (window.Lobibox) {
-                    window.Lobibox.notify('info', {
+                    const notifyType = isAdmin ? 'info' : 'default';
+                    window.Lobibox.notify(notifyType, {
                         pauseDelayOnHover: true,
                         continueDelayOnInactiveTab: false,
                         position: 'top right',
-                        icon: `bi ${icon}`,
+                        icon: isAdmin ? `bi ${icon}` : `fa ${icon.replace('bi-', 'fa-')}`,
                         title: title,
-                        msg: message || 'Vous avez une nouvelle notification'
+                        msg: message || 'Vous avez une nouvelle notification',
+                        onClick: function() {
+                            window.location.href = url;
+                        }
                     });
+                } else {
+                    console.error('Lobibox non trouvé pour afficher la notification');
                 }
             });
     }

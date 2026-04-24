@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -49,9 +50,9 @@ class TestPushNotification extends Notification
     /**
      * Get the broadcastable representation of the notification.
      */
-    public function toBroadcast(object $notifiable): \Illuminate\Notifications\Messages\BroadcastMessage
+    public function toBroadcast(object $notifiable): BroadcastMessage
     {
-        return new \Illuminate\Notifications\Messages\BroadcastMessage([
+        return new BroadcastMessage([
             'title' => $this->title,
             'message' => $this->message,
         ]);

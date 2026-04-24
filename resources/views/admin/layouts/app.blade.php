@@ -60,24 +60,21 @@
 
 </div>
 
-@vite(['resources/js/app.js'])
-<!--end wrapper-->
-
 <!-- Bootstrap bundle JS -->
 <script src="{{asset('assets/admin/js/bootstrap.bundle.min.js')}}"></script>
     <!--plugins-->
     <script src="{{asset('assets/admin/js/jquery.min.js')}}"></script>
-    <script src="{{asset('assets/admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
+    @include('components.notification')
+
+    @vite(['resources/js/app.js'])
+<script src="{{asset('assets/admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
     <script src="{{asset('assets/admin/plugins/simplebar/js/simplebar.min.js')}}"></script>
 <script src="{{asset('assets/admin/plugins/metismenu/js/metisMenu.min.js')}}"></script>
 <script src="{{asset('assets/admin/js/pace.min.js')}}"></script>
 
     <!--app-->
-    <script src="{{asset('assets/admin/js/app.js')}}"></script>
-    <script src="{{asset('assets/admin/js/index4.js')}}"></script>
-
-<!-- Component for notifications -->
-@include('components.notification')
+<script src="{{asset('assets/admin/js/app.js')}}"></script>
+<script src="{{asset('assets/admin/js/index4.js')}}"></script>
 
 @yield('extra_js')
 

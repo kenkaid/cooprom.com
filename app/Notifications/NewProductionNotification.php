@@ -44,7 +44,7 @@ class NewProductionNotification extends Notification implements ShouldQueue
             'title' => 'Nouvelle Production',
             'message' => $userName . ' a créé un nouveau projet de production : ' . $this->production->title,
             'production_id' => $this->production->id,
-            'url' => route('admin.productions.show', $this->production->id),
+            'url' => route('admin.productions.show', $this->production->uuid),
         ];
     }
 

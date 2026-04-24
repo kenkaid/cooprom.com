@@ -44,7 +44,7 @@ class NewTravelNotification extends Notification implements ShouldQueue
             'title' => 'Nouvelle Demande de Voyage',
             'message' => $userName . ' a soumis une nouvelle demande de voyage/visa pour : ' . $this->visaApplication->country,
             'visa_application_id' => $this->visaApplication->id,
-            'url' => route('admin.visa_applications.show', $this->visaApplication->id),
+            'url' => route('admin.visa_applications.show', $this->visaApplication->uuid),
         ];
     }
 

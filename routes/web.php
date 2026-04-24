@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Front\Home\HomeController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Admin\AuthController;
@@ -32,9 +33,8 @@ use App\Http\Controllers\Front\Member\SocialAssistanceController as MemberSocial
 use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
 use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
 
-Route::get('/', function () {
-    return view('front.pages.home');
-})->name('home');
+
+Route::get('/', [HomeController::class,'index'])->name('home');
 
 // Auth Front
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -125,7 +125,7 @@ Route::prefix('cp-admin-access')->name('admin.')->group(function () {
     Route::post('/login-secret', [AuthController::class, 'login']);
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    Route::middleware(['auth'])->group(function () {
+    Route::middleware(['auth', 'role:super-admin|admin|staff'])->group(function () {
         Route::get('/dashboard', function () {
             return view('admin.dashboard');
         })->name('dashboard');

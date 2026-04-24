@@ -19,6 +19,7 @@
 <link rel="shortcut icon" href="{{ asset('assets/front/images/favicon.png') }}" type="image/x-icon">
 <link rel="icon" href="{{ asset('assets/front/images/favicon.png') }}" type="image/x-icon">
 
+    <link href="{{asset('/assets/admin/plugins/notifications/css/lobibox.min.css')}}" rel="stylesheet"/>
     <!-- Responsive -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -72,6 +73,9 @@
 <script src="{{ asset('assets/front/js/validate.js') }}"></script>
     <script src="{{ asset('assets/front/js/script.js') }}"></script>
     <script src="{{ asset('assets/front/js/custom-animations.js') }}"></script>
+
+    @vite(['resources/js/app.js'])
+    @include('components.notification')
 
     @yield('extra_js')
 

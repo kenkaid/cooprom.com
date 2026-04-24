@@ -23,6 +23,18 @@ class AuthController extends Controller
         $remember = $request->has('remember');
 
         if (Auth::attempt($credentials, $remember)) {
+            $user = Auth::user();
+
+            if (! $user->hasRole(['super-admin', 'admin', 'staff'])) {
+                Auth::logout();
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
+
+                return redirect()->route('login')->withErrors([
+                    'email' => 'Accès refusé. Vous n\'avez pas les droits nécessaires pour accéder à l\'espace administration.',
+                ]);
+            }
+
             $request->session()->regenerate();
             return redirect()->route('admin.dashboard');
         }

@@ -35,9 +35,9 @@ var Lobibox = Lobibox || {};
         var _processInput = function (options) {
 
             if (options.size === 'mini' || options.size === 'large') {
-                options = this.extend({}, Lobibox.notify.OPTIONS[options.size], options);
+                options = $.extend({}, Lobibox.notify.OPTIONS[options.size], options);
             }
-            options = this.extend({}, Lobibox.notify.OPTIONS[me.$type], Lobibox.notify.DEFAULTS, options);
+            options = $.extend({}, Lobibox.notify.OPTIONS[me.$type], Lobibox.notify.DEFAULTS, options);
 
             if (options.size !== 'mini' && options.title === true) {
                 options.title = Lobibox.notify.OPTIONS[me.$type].title;
@@ -309,7 +309,12 @@ var Lobibox = Lobibox || {};
             me.$el = $notify;
             if (me.$options.sound) {
                 var snd = new Audio(me.$options.sound); // buffers automatically when created
-                snd.play();
+                var playPromise = snd.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(function(error) {
+                        console.warn("Autoplay was prevented: ", error);
+                    });
+                }
             }
             if (me.$options.rounded) {
                 me.$el.addClass('rounded');
@@ -354,7 +359,7 @@ var Lobibox = Lobibox || {};
         title: true,                // Title of notification. If you do not include the title in options it will automatically takes its value
         //from Lobibox.notify.OPTIONS object depending of the type of the notifications or set custom string. Set this false to disable title
         size: 'normal',             // normal, mini, large
-        soundPath: 'sounds/',   // The folder path where sounds are located
+        soundPath: '/assets/admin/plugins/notifications/sounds/',   // The folder path where sounds are located
         soundExt: '.ogg',           // Default extension for all sounds
         showClass: 'fadeInDown',    // Show animation class.
         hideClass: 'zoomOut',       // Hide animation class.

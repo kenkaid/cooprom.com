@@ -6,6 +6,7 @@ use App\Repositories\TravelRepository;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Notifications\NewTravelNotification;
+use App\Notifications\MemberGenericNotification;
 use Illuminate\Support\Facades\Notification;
 
 use App\Models\VisaApplication;
@@ -37,7 +38,6 @@ class TravelService
         }
 
         $visaApplication = $this->repository->createVisaApplication([
-            'uuid' => (string) \Illuminate\Support\Str::uuid(),
             'user_id' => Auth::id(),
             'travel_id' => $travel ? $travel->id : null,
             'country' => $data['country'],
@@ -49,6 +49,15 @@ class TravelService
         // Notify Admins
         $admins = User::role(['super-admin', 'admin'])->get();
         Notification::send($admins, new NewTravelNotification($visaApplication));
+
+        // Notify User (Success Feedback)
+        Auth::user()->notify(new MemberGenericNotification([
+            'title' => 'Demande de Visa Soumise',
+            'message' => 'Votre demande de visa pour ' . $visaApplication->country . ' a été envoyée avec succès.',
+            'icon' => 'fa-plane',
+            'url' => route('member.travels.index'),
+            'buttonText' => 'Voir mes demandes'
+        ]));
 
         return $visaApplication;
     }

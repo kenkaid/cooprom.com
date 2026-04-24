@@ -1,6 +1,6 @@
 {{--<!-- Notification libox js -->--}}
-<script src="{{asset('assets/admin/plugins/notifications/js/lobibox.min.js')}}"></script>
-<script src="{{asset('assets/admin/plugins/notifications/js/notifications.min.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/notifications/js/lobibox.js')}}"></script>
+<script src="{{asset('assets/admin/plugins/notifications/js/notifications.js')}}"></script>
 <script src="{{asset('assets/admin/plugins/notifications/js/notification-custom-script.js')}}"></script>
 
 <style>
@@ -34,7 +34,7 @@
     .lobibox-notify .lobibox-notify-msg { font-size: 13px; line-height: 1.45; opacity: .95; }
 
     /* Thèmes par type (verre coloré) */
-    .lobibox-notify-info {
+    .lobibox-notify-info, .lobibox-notify-default {
         background: linear-gradient(135deg, rgba(0,148,255,.10), rgba(0,148,255,.06)) !important;
         color: #0B5ED7 !important;
     }

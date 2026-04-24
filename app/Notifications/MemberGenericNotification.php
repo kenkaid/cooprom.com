@@ -22,7 +22,6 @@ class MemberGenericNotification extends Notification implements \Illuminate\Cont
     public function __construct(array $details)
     {
         $this->details = $details;
-        Log::info('[MemberGenericNotification] Instance créée', ['details' => $details]);
     }
 
     /**
@@ -32,8 +31,7 @@ class MemberGenericNotification extends Notification implements \Illuminate\Cont
      */
     public function via(object $notifiable): array
     {
-        Log::info('[MemberGenericNotification] via appelé pour ' . get_class($notifiable) . ' ID: ' . ($notifiable->id ?? 'unknown'));
-
+        //Log::info('[MemberGenericNotification] via appelé pour ' . get_class($notifiable) . ' ID: ' . ($notifiable->id ?? 'unknown'));
         $channels = ['database', 'broadcast'];
 
         if (!empty($notifiable->email)) {
