@@ -19,7 +19,7 @@
         <div class="row">
             @include('front.member.partials.sidebar')
 
-            <div class="col-lg-9 col-md-12">
+            <div class="col-lg-9 col-md-12 col-12">
                 <div class="row">
                     @forelse($insurances as $insurance)
                         <div class="col-md-6 mb-4">

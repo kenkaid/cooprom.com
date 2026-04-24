@@ -19,7 +19,7 @@
         <div class="row">
             @include('front.member.partials.sidebar')
 
-            <div class="col-lg-9 col-md-12">
+            <div class="col-lg-9 col-md-12 col-12">
                 <div class="inner-column bg-white p-4 rounded shadow-sm">
                     <h3>Soumettre un nouveau projet de production</h3>
                     <p>Remplissez le formulaire ci-dessous pour présenter votre projet à l'équipe COOPROM.</p>

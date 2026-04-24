@@ -20,7 +20,7 @@
         <div class="row">
             @include('front.member.partials.sidebar')
 
-            <div class="col-lg-9 col-md-12">
+            <div class="col-lg-9 col-md-12 col-12">
                 <div class="card border-0 shadow-sm rounded-lg overflow-hidden">
                     <div class="card-header bg-white p-4 border-0">
                         <h4 class="mb-0 font-weight-bold">Nouvelle Consultation</h4>

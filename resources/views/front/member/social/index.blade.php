@@ -19,7 +19,7 @@
         <div class="row">
             @include('front.member.partials.sidebar')
 
-            <div class="col-lg-9 col-md-12">
+            <div class="col-lg-9 col-md-12 col-12">
                 @if(session('success'))
                     <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4" role="alert">
                         {{ session('success') }}

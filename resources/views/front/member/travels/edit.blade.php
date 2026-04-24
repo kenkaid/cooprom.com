@@ -20,7 +20,7 @@
         <div class="row">
             @include('front.member.partials.sidebar')
 
-            <div class="col-lg-9 col-md-12">
+            <div class="col-lg-9 col-md-12 col-12">
                 <div class="inner-column bg-white p-4 rounded shadow-sm">
                     <h3>Modifier ma demande d'assistance visa</h3>
                     <p>Vous pouvez mettre à jour les informations de votre demande.</p>

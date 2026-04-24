@@ -10,7 +10,7 @@
                 </div>
                 <div class="top-right">
                     <ul class="contact-list">
-                        <li><a href="mailto:contact@cooprom.ci"><i class="fa fa-envelope"></i> contact@cooprom.org</a></li>
+                        <li><a href="mailto:contact@cooprom.org"><i class="fa fa-envelope"></i> contact@cooprom.org</a></li>
                         <li><i class="fa fa-map-marker-alt"></i> Abidjan, Côte d'Ivoire</li>
                         @auth
                             <li class="dropdown" style="margin-left: 10px; position: relative;">
@@ -36,7 +36,7 @@
                                                 <div class="bg-light text-info rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 35px; height: 35px; flex-shrink: 0;">
                                                     <i class="fa {{ $notification->data['icon'] ?? 'fa-bell' }}" style="font-size: 14px;"></i>
                                                 </div>
-                                                <div>
+                                                <div style="flex-grow: 1;">
                                                     <div class="small font-weight-bold">{{ $notification->data['title'] ?? 'Notification' }}</div>
                                                     <div class="small text-muted">{{ Str::limit($notification->data['message'] ?? '', 50) }}</div>
                                                     <div class="very-small text-muted mt-1" style="font-size: 10px;">{{ $notification->created_at->diffForHumans() }}</div>
@@ -121,6 +121,31 @@
                                         </ul>
                                     </li>
 
+                                    <li class="dropdown d-lg-none {{ request()->routeIs('member.*') ? 'current' : '' }}">
+                                        @auth
+                                            <a href="#"><span>Mon Espace</span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="{{ route('member.dashboard') }}"><i class="fa fa-th-large mr-2"></i> Tableau de bord</a></li>
+                                                <li><a href="{{ route('member.profile.edit') }}"><i class="fa fa-user-circle mr-2"></i> Mon Profil</a></li>
+                                                <li><a href="{{ route('member.productions.index') }}"><i class="fa fa-compact-disc mr-2"></i> Mes Productions</a></li>
+                                                <li><a href="{{ route('member.contracts.index') }}"><i class="fa fa-file-signature mr-2"></i> Mes Contrats</a></li>
+                                                <li><a href="{{ route('member.legal.index') }}"><i class="fa fa-gavel mr-2"></i> Conseil Juridique</a></li>
+                                                <li><a href="{{ route('member.travels.index') }}"><i class="fa fa-plane-departure mr-2"></i> Voyages & Visas</a></li>
+                                                <li><a href="{{ route('member.social.index') }}"><i class="fa fa-hand-holding-heart mr-2"></i> Aide Sociale</a></li>
+                                                <li><a href="{{ route('member.appointments.index') }}"><i class="fa fa-calendar-alt mr-2"></i> Mes Rendez-vous</a></li>
+                                                <li>
+                                                    <form action="{{ route('logout') }}" method="POST" id="logout-form-mobile" style="display: none;">@csrf</form>
+                                                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();" class="text-danger">
+                                                        <i class="fa fa-power-off mr-2"></i> Déconnexion
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        @else
+                                            <a href="{{ route('login') }}"><span>Connexion</span></a>
+                                            <a href="{{ route('register') }}"><span>Devenir Adhérent</span></a>
+                                        @endauth
+                                    </li>
+
                                     <li><a href="#"><span>Contact</span></a></li>
                                 </ul>
                             </div>
@@ -152,7 +177,7 @@
 
         <!-- Mobile Header -->
         <div class="mobile-header">
-            <div class="logo"><a href="index.html"><img src="{{ asset('assets/front/images/logo-2.png') }}" alt="" title="" ></a></div>
+            <div class="logo"><a href="{{route('home')}}"><img src="{{ asset('assets/front/images/logo.jpg') }}" alt="" title="" ></a></div>
 
             <!--Nav Box-->
             <div class="nav-outer clearfix">
@@ -162,7 +187,7 @@
 
         <!-- Mobile Sticky Header -->
         <div class="mobile-sticky-header">
-            <div class="logo"><a href="index.html"><img src="{{ asset('assets/front/images/logo-2.png') }}" alt="" title="" ></a></div>
+            <div class="logo"><a href="{{route('home')}}"><img src="{{ asset('assets/front/images/logo.jpg') }}" alt="" title="" ></a></div>
 
             <!--Nav Box-->
             <div class="nav-outer clearfix">
@@ -172,14 +197,78 @@
 
         <!-- Mobile Menu  -->
         <div class="mobile-menu">
+            <style>
+                @media only screen and (min-width: 768px) {
+                    .d-lg-none {
+                        display: none !important;
+                    }
+                }
+                /* Style créatif pour la section Espace Membre et Auth dans le menu mobile */
+                .mobile-menu .navigation li.dropdown.d-lg-none > a,
+                .mobile-menu .navigation li.d-lg-none > a {
+                    background: rgba(250, 88, 77, 0.1);
+                    color: #fa584d !important;
+                    font-weight: 700 !important;
+                    border-left: 4px solid #fa584d;
+                    margin: 10px 15px;
+                    border-radius: 5px;
+                }
+                .mobile-menu .navigation li.dropdown.d-lg-none .dropdown-btn {
+                    color: #fa584d !important;
+                }
+                .mobile-menu .navigation li.dropdown.d-lg-none ul li a {
+                    padding-left: 30px !important;
+                    font-size: 14px;
+                }
+                .mobile-menu .navigation li.dropdown.d-lg-none ul li a i {
+                    width: 20px;
+                    text-align: center;
+                    color: #fa584d;
+                }
+                .mobile-menu .user-profile-mobile {
+                    padding: 20px 15px;
+                    background: #f8f9fa;
+                    border-bottom: 1px solid #eee;
+                    display: flex;
+                    align-items: center;
+                    gap: 15px;
+                }
+                .mobile-menu .user-profile-mobile img {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 2px solid #fa584d;
+                }
+                .mobile-menu .user-profile-mobile .info h5 {
+                    margin: 0;
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: #333;
+                }
+                .mobile-menu .user-profile-mobile .info span {
+                    font-size: 12px;
+                    color: #777;
+                }
+            </style>
             <span class="mobile-menu-back-drop"></span>
             <div class="menu-outer">
                 <nav class="menu-box">
-                    <div class="nav-logo"><a href="index.html"><img src="{{ asset('assets/front/images/logo-2.png') }}" alt="" title="" ></a></div><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+                    <div class="nav-logo"><a href="{{route('home')}}"><img src="{{ asset('assets/front/images/logo.jpg') }}" alt="" title="" ></a></div><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
+
+                    @auth
+                        <div class="user-profile-mobile">
+                            <img src="{{ auth()->user()->photo ? asset('storage/'.auth()->user()->photo) : asset('assets/admin/images/avatars/avatar-1.png') }}" alt="Avatar">
+                            <div class="info">
+                                <h5>{{ auth()->user()->name }} {{ auth()->user()->last_name }}</h5>
+                                <span>{{ auth()->user()->culturalSector->name ?? 'Membre Adhérent' }}</span>
+                            </div>
+                        </div>
+                    @endauth
                 </nav>
 
                 <div class="menu-search">
-                    <form method="post" action="blog-checkerboard.html">
+                    <form method="post">
                         <div class="form-group">
                             <input type="text" class="input" name="search-field" value="" placeholder="Search..." required="">
                             <button type="submit"><i class="fa fa-search"></i></button>
@@ -196,11 +285,11 @@
             <div class="search-inner">
                 <div class="auto-container">
                     <div class="upper-text">
-                        <div class="text">Search for anything.</div>
+                        <div class="text">Vous recherchez ?</div>
                         <button class="close-search"><span class="fa fa-times"></span></button>
                     </div>
 
-                    <form method="post" action="blog-checkerboard.html">
+                    <form method="post">
                         <div class="form-group">
                             <input type="search" name="search-field" value="" placeholder="Search..." required="">
                             <button type="submit"><i class="fa fa-search"></i></button>

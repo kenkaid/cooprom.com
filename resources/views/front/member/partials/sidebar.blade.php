@@ -1,4 +1,4 @@
-<div class="col-lg-3 col-md-12">
+<div class="col-lg-3 col-md-12 d-none d-lg-block">
     <div class="inner-column bg-white shadow-sm p-0 rounded-lg overflow-hidden border">
         <div class="user-info text-center p-4 bg-light">
             <div class="image mb-3 position-relative d-inline-block">

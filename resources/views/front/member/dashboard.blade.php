@@ -21,7 +21,7 @@
             @include('front.member.partials.sidebar')
 
             <!-- Contenu Principal -->
-            <div class="col-lg-9 col-md-12">
+            <div class="col-lg-9 col-md-12 col-12 col-12">
                 <div class="welcome-box mb-4 p-4 rounded-lg bg-white shadow-sm border-left-orange">
                     <div class="d-flex align-items-center">
                         <div class="icon-box mr-4 bg-light p-3 rounded-circle">

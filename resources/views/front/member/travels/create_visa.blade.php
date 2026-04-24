@@ -19,7 +19,7 @@
         <div class="row">
             @include('front.member.partials.sidebar')
 
-            <div class="col-lg-9 col-md-12">
+            <div class="col-lg-9 col-md-12 col-12">
                 <div class="inner-column bg-white p-4 rounded shadow-sm">
                     <h3>Nouvelle Demande d'Assistance Visa</h3>
                     <p>Veuillez remplir les informations pour que nous puissions vous assister dans vos démarches.</p>
