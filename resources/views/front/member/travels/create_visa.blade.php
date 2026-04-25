@@ -5,8 +5,9 @@
 @section('content')
 
     @php
+        $image_link = 'assets/front/images/resource/members/visa.jpeg';
         $title = 'Assistance Visa';
-        $breadcumb_table = ['' => 'Nouvelle demande']
+        $breadcumb_table = ['Nouvelle demande']
     @endphp
     @include('front.member.partials.slide_header')
 

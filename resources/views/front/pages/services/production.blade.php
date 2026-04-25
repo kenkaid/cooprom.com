@@ -3,109 +3,137 @@
 @section('title', 'Production Numérique - COOPROM | Technologie Temps Réel')
 
 @section('content')
-    <!-- Page Title -->
-    <section class="page-title" style="background-image: url({{ asset('assets/front/images/background/7.jpg') }});">
-        <div class="auto-container">
-            <div class="content-box">
-                <div class="title">
-                    <h1>Production Numérique</h1>
-                </div>
-                <ul class="page-breadcrumb">
-                    <li><a href="/">Accueil</a></li>
-                    <li>Services</li>
-                    <li>Production</li>
-                </ul>
+    <!-- Tech/Futuristic Hero -->
+    <section class="tech-hero position-relative d-flex align-items-center justify-content-center text-white overflow-hidden" style="height: 80vh; background: #000;">
+        <div class="video-overlay position-absolute w-100 h-100" style="background: url({{ asset('assets/front/images/background/7.jpg') }}) center/cover fixed; opacity: 0.4;"></div>
+        <div class="glitch-overlay position-absolute w-100 h-100" style="background: linear-gradient(0deg, rgba(255,60,54,0.4) 0%, transparent 100%);"></div>
+
+        <div class="auto-container position-relative z-index-1 text-center animate-up">
+            <h5 class="text-danger font-weight-bold text-uppercase mb-3 tracking-widest"><i class="fas fa-microchip mr-2"></i> Future-Ready Art</h5>
+            <h1 class="display-2 font-weight-bold mb-4">Production <span class="text-gradient">Numérique</span></h1>
+            <p class="lead mb-5 max-width-700 mx-auto text-white" style="opacity: 0.95;">Plongez dans l'ère du Temps Réel. La COOPROM propulse votre créativité grâce aux dernières innovations technologiques.</p>
+            <div class="scroll-indicator animate-bounce">
+                <i class="fas fa-chevron-down fa-2x text-danger"></i>
             </div>
         </div>
     </section>
 
-    <!-- Service Detail Section -->
-    <section class="service-detail-section py-5">
-        <div class="auto-container py-4">
-            <div class="row">
-                <!-- Sidebar Column -->
-                <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
-                    <aside class="sidebar bg-light p-4 rounded shadow-sm">
-                        <div class="sidebar-widget categories-widget">
-                            <div class="widget-content">
-                                <ul class="services-categories">
-                                    <li><a href="{{ route('services.promotion') }}">Promotion Artistique</a></li>
-                                    <li class="active"><a href="{{ route('services.production') }}">Production Numérique</a></li>
-                                    <li><a href="{{ route('services.travels') }}">Voyages d'Affaires</a></li>
-                                    <li><a href="{{ route('services.events') }}">Événementiel</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="sidebar-widget help-widget mt-4">
-                            <div class="widget-content bg-red text-white p-4 rounded text-center">
-                                <div class="icon-box mb-3"><span class="fas fa-video text-white h1"></span></div>
-                                <h4 class="text-white">Studio Digital</h4>
-                                <p class="small text-white">Donnez une dimension technologique à vos œuvres artistiques.</p>
-                                <a href="#" class="theme-btn btn-style-one bg-white text-danger btn-sm mt-3"><span class="btn-title" style="color:#ff3c36;">En savoir plus</span></a>
-                            </div>
-                        </div>
-                    </aside>
+    <!-- Innovation Section -->
+    <section class="py-5 bg-white">
+        <div class="auto-container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 animate-left">
+                    <div class="image-wrapper position-relative">
+                        <div class="tech-border position-absolute w-100 h-100 border-2 border-danger rounded-2xl" style="top: -20px; left: -20px; z-index: -1;"></div>
+                        <img src="{{ asset('assets/front/images/resource/service-2.jpg') }}" alt="Innovation" class="img-fluid rounded-2xl shadow-2xl">
+                    </div>
                 </div>
+                <div class="col-lg-6 mt-5 mt-lg-0 animate-right">
+                    <div class="pl-lg-5">
+                        <h2 class="display-5 font-weight-bold mb-4">L'Innovation au service de l'Art</h2>
+                        <p class="lead text-danger font-weight-bold mb-4">Technologies "Temps Réel" & Immersives</p>
+                        <p class="text-muted mb-5" style="font-size: 1.1rem; line-height: 1.8;">
+                            La COOPROM offre aux artistes un accès privilégié à une plateforme de production axée sur les pratiques modernes. Notre objectif est d'accompagner l'artiste ivoirien dans sa transition vers le numérique, en lui offrant les outils nécessaires pour créer des œuvres impactantes.
+                        </p>
 
-                <!-- Content Column -->
-                <div class="content-side col-lg-8 col-md-12 col-sm-12">
-                    <div class="service-details pl-lg-4">
-                        <div class="image-box mb-5">
-                            <figure class="image rounded shadow-lg overflow-hidden"><img src="{{ asset('assets/front/images/resource/service-2.jpg') }}" alt="Production Numérique COOPROM"></figure>
-                        </div>
-                        <div class="sec-title-two mb-4">
-                            <span class="title text-danger">NUMÉRIQUE & TEMPS RÉEL</span>
-                            <h2 class="font-weight-bold">L'innovation technologique au service de l'art</h2>
-                        </div>
-                        <div class="text text-justify" style="line-height: 1.8;">
-                            <p class="mb-4">La COOPROM offre aux artistes un accès privilégié à une plateforme de production axée sur les pratiques artistiques et culturelles modernes, portées par les nouvelles technologies dites <strong>"temps réel"</strong>.</p>
-                            <p class="mb-4">Notre objectif est d'accompagner l'artiste ivoirien dans sa transition vers le numérique, en lui offrant les outils et la formation nécessaires pour créer des œuvres immersives et impactantes.</p>
-                        </div>
-
-                        <!-- Production Grid -->
-                        <div class="row mt-5">
-                            <div class="col-md-6 mb-4">
-                                <div class="production-card p-4 border rounded shadow-sm h-100 text-center transition-y">
-                                    <div class="icon text-danger h1 mb-3"><i class="fas fa-film"></i></div>
-                                    <h5 class="font-weight-bold">Cinéma & Clips</h5>
-                                    <p class="small text-muted">Réalisation de clips vidéo et projets cinématographiques de haute qualité.</p>
+                        <div class="row g-3">
+                            <div class="col-md-6 mb-3">
+                                <div class="p-3 bg-light rounded-xl border-left-5 border-danger">
+                                    <h6 class="font-weight-bold mb-0">Cinéma & Clips</h6>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="production-card p-4 border rounded shadow-sm h-100 text-center transition-y">
-                                    <div class="icon text-danger h1 mb-3"><i class="fas fa-vr-cardboard"></i></div>
-                                    <h5 class="font-weight-bold">Galeries Virtuelles</h5>
-                                    <p class="small text-muted">Exposition de vos œuvres dans des espaces numériques accessibles mondialement.</p>
+                            <div class="col-md-6 mb-3">
+                                <div class="p-3 bg-light rounded-xl border-left-5 border-danger">
+                                    <h6 class="font-weight-bold mb-0">Galeries Virtuelles</h6>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="sec-title-two mt-5 mb-4">
-                            <h3 class="font-weight-bold">Accompagnement Numérique</h3>
-                        </div>
-                        <div class="text text-justify mb-5">
-                            <p>Nous développons un réseau de partenaires experts pour favoriser les échanges d’expériences et la co-production numérique. Nos adhérents bénéficient de :</p>
-                        </div>
-                        <ul class="list-style-three">
-                            <li class="mb-3 d-flex align-items-center"><i class="fas fa-microchip text-danger mr-3"></i> Formation aux outils numériques de production.</li>
-                            <li class="mb-3 d-flex align-items-center"><i class="fas fa-project-diagram text-danger mr-3"></i> Support technique pour les projets "Temps Réel".</li>
-                            <li class="mb-3 d-flex align-items-center"><i class="fas fa-tv text-danger mr-3"></i> Réalisation de publi-reportages institutionnels.</li>
-                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Tech Grid -->
+    <section class="py-5 bg-light">
+        <div class="auto-container py-5">
+            <div class="sec-title-creative text-center mb-5">
+                <h2 class="font-weight-bold">Notre Écosystème Digital</h2>
+                <div class="divider mx-auto bg-danger" style="width: 50px; height: 3px;"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 col-md-6 mb-4 animate-up">
+                    <div class="tech-card p-5 bg-white rounded-2xl shadow-sm hover-shadow-xl transition-all h-100">
+                        <div class="icon-box text-white bg-danger mb-4 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; border-radius: 15px;">
+                            <i class="fas fa-vr-cardboard fa-lg"></i>
+                        </div>
+                        <h4 class="font-weight-bold mb-3">Immersif</h4>
+                        <p class="text-muted small">Création d'espaces virtuels et d'expositions 3D accessibles depuis n'importe quel point du globe.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 animate-up" style="animation-delay: 0.2s;">
+                    <div class="tech-card p-5 bg-white rounded-2xl shadow-sm hover-shadow-xl transition-all h-100">
+                        <div class="icon-box text-white bg-dark mb-4 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; border-radius: 15px;">
+                            <i class="fas fa-bolt fa-lg text-danger"></i>
+                        </div>
+                        <h4 class="font-weight-bold mb-3">Temps Réel</h4>
+                        <p class="text-muted small">Support technique pour les performances live utilisant des technologies de pointe (Mocap, VFX).</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4 animate-up" style="animation-delay: 0.3s;">
+                    <div class="tech-card p-5 bg-white rounded-2xl shadow-sm hover-shadow-xl transition-all h-100">
+                        <div class="icon-box text-white bg-danger mb-4 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px; border-radius: 15px;">
+                            <i class="fas fa-chalkboard-teacher fa-lg"></i>
+                        </div>
+                        <h4 class="font-weight-bold mb-3">Formation</h4>
+                        <p class="text-muted small">Programmes d'apprentissage sur les outils numériques de production pour tous nos adhérents.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Sticky Nav -->
+    <div class="service-nav-sticky bg-white shadow-lg border-top py-3">
+        <div class="auto-container">
+            <div class="d-flex justify-content-center align-items-center flex-wrap">
+                <a href="{{ route('services.promotion') }}" class="btn btn-link text-muted px-3">Promotion</a>
+                <a href="{{ route('services.production') }}" class="btn btn-link text-danger font-weight-bold px-3 border-bottom border-danger">Production</a>
+                <a href="{{ route('services.travels') }}" class="btn btn-link text-muted px-3">Voyages</a>
+                <a href="{{ route('services.events') }}" class="btn btn-link text-muted px-3">Événementiel</a>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('extra_css')
 <style>
-    .services-categories { list-style: none; padding-left: 0; }
-    .services-categories li { border-bottom: 1px solid #eee; }
-    .services-categories li a { display: block; padding: 12px 0; color: #333; transition: 0.3s; font-weight: 500; }
-    .services-categories li.active a, .services-categories li a:hover { color: #ff3c36; padding-left: 10px; }
-    .transition-y:hover { transform: translateY(-10px); transition: 0.3s; }
-    .bg-red { background-color: #ff3c36; }
+    .z-index-1 { z-index: 1; }
+    .tracking-widest { letter-spacing: 0.3em; }
+    .max-width-700 { max-width: 700px; }
+    .rounded-2xl { border-radius: 25px !important; }
+    .border-left-5 { border-left: 5px solid !important; }
+
+    .text-gradient {
+        background: linear-gradient(45deg, #ff3c36, #ffffff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .animate-up { opacity: 0; animation: fadeInUp 1s forwards; }
+    .animate-left { opacity: 0; animation: fadeInLeft 1s forwards; }
+    .animate-right { opacity: 0; animation: fadeInRight 1s forwards; }
+    .animate-bounce { animation: bounce 2s infinite; }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-30px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+
+    .tech-card:hover { transform: translateY(-10px); border-color: #ff3c36 !important; }
+    .hover-shadow-xl:hover { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1) !important; }
+
+    .service-nav-sticky { position: sticky; bottom: 0; z-index: 100; }
 </style>
 @endsection

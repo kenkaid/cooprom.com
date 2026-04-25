@@ -39,7 +39,8 @@
                                     <li style="margin-bottom: 15px;"><a href="{{ route('cooprom.presentation') }}">Présentation</a></li>
                                     <li style="margin-bottom: 15px;"><a href="{{ route('cooprom.missions') }}">Missions & Objectifs</a></li>
                                     <li style="margin-bottom: 15px;"><a href="{{ route('cooprom.partenaires') }}">Nos Partenaires</a></li>
-                                    <li style="margin-bottom: 15px;"><a href="#">Devenir Adhérent</a></li>
+                                    <li style="margin-bottom: 15px;"><a href="{{ route('register') }}">Devenir Adhérent</a></li>
+                                    <li style="margin-bottom: 15px;"><a href="{{ route('contact') }}">Nous Contacter</a></li>
                                 </ul>
                             </div>
                         </div>

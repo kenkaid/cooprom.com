@@ -1,4 +1,4 @@
-<section class="page-title"
+<section class="page-title member-slide-header"
          style="background-image: url({{ asset($image_link) }});">
     <div class="auto-container">
         <h1>{{ $title  }}</h1>

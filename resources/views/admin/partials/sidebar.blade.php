@@ -121,14 +121,14 @@
             </a>
         </li>
         <li>
-            <a href="javascript:;">
+            <a href="{{ route('admin.events.index') }}">
                 <div class="parent-icon"><i class="bi bi-calendar-event-fill"></i>
                 </div>
                 <div class="menu-title">Événements</div>
             </a>
         </li>
         <li>
-            <a href="javascript:;">
+            <a href="{{ route('admin.partners.index') }}">
                 <div class="parent-icon"><i class="bi bi-star-fill"></i>
                 </div>
                 <div class="menu-title">Partenaires</div>
@@ -136,7 +136,7 @@
         </li>
         <li class="menu-label">Communication</li>
         <li>
-            <a href="javascript:;">
+            <a href="{{ route('admin.contacts.index') }}">
                 <div class="parent-icon"><i class="bi bi-chat-dots-fill"></i>
                 </div>
                 <div class="menu-title">Messages Contacts</div>

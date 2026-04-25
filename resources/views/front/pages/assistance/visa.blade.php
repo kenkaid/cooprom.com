@@ -3,108 +3,128 @@
 @section('title', 'Assistance Visa - COOPROM | Accompagnement International')
 
 @section('content')
-    <!-- Page Title -->
-    <section class="page-title" style="background-image: url({{ asset('assets/front/images/background/7.jpg') }});">
-        <div class="auto-container">
-            <div class="content-box">
-                <div class="title">
-                    <h1>Assistance Visa</h1>
-                </div>
-                <ul class="page-breadcrumb">
-                    <li><a href="/">Accueil</a></li>
-                    <li>Assistance</li>
-                    <li>Visa</li>
-                </ul>
+    <!-- Visa Hero Section -->
+    <section class="visa-hero position-relative d-flex align-items-center justify-content-center text-white overflow-hidden" style="height: 70vh; background: #000;">
+        <div class="hero-bg position-absolute w-100 h-100" style="background: url({{ asset('assets/front/images/resource/members/visa.jpeg') }}) center/cover fixed; opacity: 0.5;"></div>
+        <div class="overlay position-absolute w-100 h-100" style="background: linear-gradient(to bottom, transparent, rgba(255,60,54,0.6));"></div>
+
+        <div class="auto-container position-relative z-index-1 text-center animate-up">
+            <h5 class="text-danger font-weight-bold text-uppercase mb-3 tracking-widest">Mobilité Sans Frontières</h5>
+            <h1 class="display-2 font-weight-bold mb-4">Votre <span class="text-white">Visa</span> pour le succès</h1>
+            <p class="lead mb-5 max-width-700 mx-auto text-white" style="opacity: 0.95;">La COOPROM simplifie vos démarches administratives internationales pour que votre talent n'ait aucune limite géographique.</p>
+            <div class="hero-btns">
+                <a href="{{ route('member.travels.create_visa') }}" class="theme-btn btn-style-one px-5">
+                    <span class="btn-title">Démarrer une demande <i class="fas fa-passport ml-2"></i></span>
+                </a>
             </div>
+        </div>
+
+        <!-- Floating Cloud/Plane Decoration -->
+        <div class="position-absolute animate-float" style="top: 20%; left: 5%; opacity: 0.1;">
+            <i class="fas fa-cloud fa-5x"></i>
+        </div>
+        <div class="position-absolute animate-float" style="bottom: 30%; right: 10%; opacity: 0.1; animation-delay: 2s;">
+            <i class="fas fa-plane fa-7x"></i>
         </div>
     </section>
 
-    <!-- Service Detail Section -->
-    <section class="service-detail-section py-5">
-        <div class="auto-container py-4">
-            <div class="row">
-                <!-- Sidebar Column -->
-                <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
-                    <aside class="sidebar bg-light p-4 rounded shadow-sm">
-                        <div class="sidebar-widget categories-widget">
-                            <div class="widget-content">
-                                <ul class="services-categories">
-                                    <li class="active"><a href="{{ route('assistance.visa') }}">Assistance Visa</a></li>
-                                    <li><a href="{{ route('assistance.legal') }}">Conseil Juridique</a></li>
-                                    <li><a href="{{ route('assistance.social') }}">Aide Sociale</a></li>
-                                </ul>
-                            </div>
+    <!-- Strategy Section -->
+    <section class="py-5 bg-white overflow-hidden">
+        <div class="auto-container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0 animate-left">
+                    <div class="experience-box p-5 bg-light rounded-3xl shadow-xl position-relative">
+                        <div class="sec-title-modern mb-4">
+                            <h2 class="display-5 font-weight-bold">L'Expertise du <span class="text-danger">Voyage Culturel</span></h2>
                         </div>
+                        <p class="text-muted mb-5" style="font-size: 1.1rem; line-height: 1.8;">
+                            Nous assistons, orientons et informons l’adhérant sur son type de visa et les documents exigés par l’ambassade du pays qu’il souhaite visiter dans le cadre de sa carrière. Maximisez vos chances de réussite avec un dossier impeccable.
+                        </p>
 
-                        <div class="sidebar-widget help-widget mt-4">
-                            <div class="widget-content bg-dark text-white p-4 rounded text-center border-top border-danger border-lg">
-                                <div class="icon-box mb-3"><span class="fas fa-passport text-danger h1"></span></div>
-                                <h4 class="text-white">Mobilité Artiste</h4>
-                                <p class="small">Nous facilitons vos démarches administratives pour vos tournées mondiales.</p>
-                                <a href="#" class="theme-btn btn-style-one bg_red btn-sm mt-3"><span class="btn-title">Demander une orientation</span></a>
+                        <div class="visa-steps-list">
+                            <div class="d-flex align-items-start mb-4">
+                                <div class="step-num text-danger font-weight-bold display-4 opacity-20 mr-3 mt-n2">01</div>
+                                <div>
+                                    <h5 class="font-weight-bold mb-1">Analyse du Projet</h5>
+                                    <p class="small text-muted mb-0">Identification du visa (Performance, Business ou Culture) adapté.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start mb-4">
+                                <div class="step-num text-danger font-weight-bold display-4 opacity-20 mr-3 mt-n2">02</div>
+                                <div>
+                                    <h5 class="font-weight-bold mb-1">Montage Documentaire</h5>
+                                    <p class="small text-muted mb-0">Constitution rigoureuse de la liste des documents exigés.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-start">
+                                <div class="step-num text-danger font-weight-bold display-4 opacity-20 mr-3 mt-n2">03</div>
+                                <div>
+                                    <h5 class="font-weight-bold mb-1">Accompagnement Diplomatique</h5>
+                                    <p class="small text-muted mb-0">Utilisation de nos pôles de contacts stratégiques à l'étranger.</p>
+                                </div>
                             </div>
                         </div>
-                    </aside>
+                    </div>
                 </div>
-
-                <!-- Content Column -->
-                <div class="content-side col-lg-8 col-md-12 col-sm-12">
-                    <div class="service-details pl-lg-4">
-                        <div class="image-box mb-5">
-                            <figure class="image rounded shadow-lg overflow-hidden"><img src="{{ asset('assets/front/images/resource/service-3.jpg') }}" alt="Assistance Visa COOPROM"></figure>
-                        </div>
-                        <div class="sec-title-two mb-4">
-                            <span class="title text-danger">MOBILITÉ INTERNATIONALE</span>
-                            <h2 class="font-weight-bold">Ouvrez les portes des scènes étrangères</h2>
-                        </div>
-                        <div class="text text-justify" style="line-height: 1.8;">
-                            <p class="mb-4">L'assistance de la COOPROM consiste à assister, à orienter et à informer l’adhérant sur son type de visa et les documents exigés par l’ambassade du pays qu’il souhaite visiter dans le cadre de sa carrière.</p>
-                            <p class="mb-4">Participer à un festival ou une exposition internationale demande une préparation rigoureuse. Nous mettons notre expertise à votre disposition pour maximiser les chances de réussite de vos dossiers.</p>
-                        </div>
-
-                        <!-- Visa Steps -->
-                        <div class="row mt-5">
-                            <div class="col-md-6 mb-4">
-                                <div class="step-card p-4 bg-white shadow-sm rounded h-100 border-left border-danger transition-y">
-                                    <div class="icon text-danger h2 mb-3"><i class="fas fa-info-circle"></i></div>
-                                    <h5 class="font-weight-bold">Information & Conseil</h5>
-                                    <p class="small mb-0 text-muted">Identification du type de visa adapté à votre mission culturelle (Performance, Business, Culture).</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="step-card p-4 bg-white shadow-sm rounded h-100 border-left border-danger transition-y">
-                                    <div class="icon text-danger h2 mb-3"><i class="fas fa-file-invoice"></i></div>
-                                    <h5 class="font-weight-bold">Dossier Documentaire</h5>
-                                    <p class="small mb-0 text-muted">Aide à la constitution de la liste des documents exigés par les ambassades et consulats.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sec-title-two mt-5 mb-4">
-                            <h3 class="font-weight-bold">Notre Expertise Voyage</h3>
-                        </div>
-                        <div class="text text-justify mb-4">
-                            <p>Grâce à nos relations privilégiées avec les ambassades de Côte d'Ivoire à l'étranger, nous offrons un accompagnement unique :</p>
-                        </div>
-                        <ul class="list-style-three">
-                            <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-danger mr-3"></i> Orientation personnalisée selon la destination.</li>
-                            <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-danger mr-3"></i> Vérification de la conformité des pièces justificatives.</li>
-                            <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-danger mr-3"></i> Inscription aux événements et séminaires étrangers.</li>
-                        </ul>
+                <div class="col-lg-6 animate-right">
+                    <div class="image-wrapper position-relative pl-lg-5">
+                        <div class="creative-border position-absolute w-100 h-100 border-2 border-danger rounded-2xl" style="top: -20px; right: -20px; z-index: 1;"></div>
+                        <img src="{{ asset('assets/front/images/resource/11_resized.jpeg') }}" alt="Visa" class="img-fluid rounded-2xl shadow-2xl position-relative z-index-2 transform-hover-float">
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- World Presence Preview -->
+    <section class="py-5 bg-dark text-white text-center position-relative overflow-hidden">
+        <div class="auto-container py-5 z-index-1">
+            <h2 class="display-4 font-weight-bold mb-4">Un Rayonnement <span class="text-danger">Sans Frontières</span></h2>
+            <p class="lead mb-5 text-white" style="opacity: 0.95;">Schengen, USA, Afrique, Asie... la COOPROM vous accompagne vers toutes les destinations culturelles majeures.</p>
+
+            <div class="row opacity-30 mt-5 g-5">
+                <div class="col-3"><i class="fas fa-landmark fa-4x mb-2"></i><br><small>Schengen</small></div>
+                <div class="col-3"><i class="fas fa-city fa-4x mb-2"></i><br><small>USA/Canada</small></div>
+                <div class="col-3"><i class="fas fa-torii-gate fa-4x mb-2"></i><br><small>Asie</small></div>
+                <div class="col-3"><i class="fas fa-globe-africa fa-4x mb-2"></i><br><small>Afrique</small></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Sticky Nav -->
+    <div class="service-nav-sticky bg-white shadow-lg border-top py-3">
+        <div class="auto-container">
+            <div class="d-flex justify-content-center align-items-center flex-wrap">
+                <a href="{{ route('assistance.visa') }}" class="btn btn-link text-danger font-weight-bold px-3 border-bottom border-danger">Visa</a>
+                <a href="{{ route('assistance.legal') }}" class="btn btn-link text-muted px-3">Juridique</a>
+                <a href="{{ route('assistance.social') }}" class="btn btn-link text-muted px-3">Social</a>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('extra_css')
 <style>
-    .services-categories { list-style: none; padding-left: 0; }
-    .services-categories li { border-bottom: 1px solid #eee; }
-    .services-categories li a { display: block; padding: 12px 0; color: #333; transition: 0.3s; font-weight: 500; }
-    .services-categories li.active a, .services-categories li a:hover { color: #ff3c36; padding-left: 10px; }
-    .transition-y:hover { transform: translateY(-10px); transition: 0.3s; }
-    .border-lg { border-top-width: 5px !important; }
+    .z-index-1 { z-index: 1; }
+    .z-index-2 { z-index: 2; }
+    .tracking-widest { letter-spacing: 0.4em; }
+    .rounded-3xl { border-radius: 40px !important; }
+    .rounded-2xl { border-radius: 25px !important; }
+    .rounded-xl { border-radius: 15px !important; }
+    .max-width-700 { max-width: 700px; }
+    .max-width-600 { max-width: 600px; }
+
+    .animate-up { opacity: 0; animation: fadeInUp 1s forwards; }
+    .animate-left { opacity: 0; animation: fadeInLeft 1s forwards; }
+    .animate-right { opacity: 0; animation: fadeInRight 1s forwards; }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes float { 0% { transform: translateY(0px) rotate(0deg); } 50% { transform: translateY(-20px) rotate(5deg); } 100% { transform: translateY(0px) rotate(0deg); } }
+
+    .transform-hover-float:hover { transform: translateY(-15px); transition: 0.5s; }
+    .service-nav-sticky { position: sticky; bottom: 0; z-index: 100; }
 </style>
 @endsection

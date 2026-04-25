@@ -1,147 +1,99 @@
 @extends('front.layouts.app')
 
-@section('title', 'Gallérie Photos - COOPROM')
+@section('title', 'Exposition Photo - COOPROM | L\'Art en Image')
 
 @section('content')
-    <!--Page Title-->
-    <section class="page-title" style="background-image: url({{ asset('assets/front/images/background/12.jpg') }});">
-        <div class="auto-container">
-            <h1>Gallérie Photos</h1>
-            <span class="title_divider"></span>
-            <ul class="page-breadcrumb">
-                <li><a href="{{ route('home') }}">Accueil</a></li>
-                <li>La Cooprom</li>
-                <li>Gallérie Photos</li>
-            </ul>
+    <!-- Exhibition Hero -->
+    <section class="gallery-hero position-relative d-flex align-items-center justify-content-center text-white overflow-hidden" style="height: 50vh; background: #000;">
+        <div class="hero-bg position-absolute w-100 h-100" style="background: url({{ asset('assets/front/images/background/7.jpg') }}) center/cover fixed; opacity: 0.4;"></div>
+        <div class="overlay position-absolute w-100 h-100" style="background: linear-gradient(to bottom, transparent, #000);"></div>
+
+        <div class="auto-container position-relative z-index-1 text-center animate-up">
+            <span class="d-block h5 text-danger font-weight-bold text-uppercase mb-3 tracking-widest">Exposition Virtuelle</span>
+            <h1 class="display-3 font-weight-bold mb-0">Gallérie <span class="text-transparent-stroke-white">Photos</span></h1>
+            <div class="divider mx-auto bg-danger mt-4" style="width: 60px; height: 4px;"></div>
         </div>
     </section>
-    <!--End Page Title-->
 
-    <!-- Portfolio Section -->
-    <section class="portfolio-section portfolio-three-col">
-        <div class="auto-container">
-            <div class="row">
-                @forelse($photos as $photo)
+    <!-- Photo Exhibition Grid -->
+    <section class="py-5 bg-white">
+        <div class="auto-container py-5">
+            <div class="row g-4" id="lightgallery">
+                @forelse($photos as $index => $photo)
                     @php
                         $media = $photo->getFirstMedia('library');
                     @endphp
                     @if($media)
-                        <!-- Portfolio Block Three -->
-                        <div class="portfolio-block-three col-lg-4 col-md-6 col-sm-12 wow fadeInUp" data-wow-delay="0ms" data-wow-duration="1500ms">
-                            <div class="inner-box">
-                                <div class="image-box">
-                                    <figure class="image">
-                                        <a href="{{ $media->getUrl() }}" class="lightbox-image" data-fancybox="gallery">
-                                            <img src="{{ $media->getUrl('thumb') }}" alt="{{ $photo->title }}" class="portfolio_image" onerror="this.src='{{ $media->getUrl() }}';">
-                                        </a>
-                                    </figure>
-                                </div>
-                                <div class="lower-content">
-                                    <h4><a href="javascript:;">{{ $photo->title }}</a></h4>
-                                    @if($photo->description)
-                                        <p>{{ Str::limit($photo->description, 100) }}</p>
-                                    @endif
-                                </div>
+                        <div class="col-lg-4 col-md-6 mb-4 animate-up" style="animation-delay: {{ $index * 0.1 }}s;">
+                            <div class="art-photo-card position-relative overflow-hidden rounded-xl group cursor-pointer shadow-lg border border-light">
+                                <a href="{{ $media->getUrl() }}" class="lightbox-image d-block" data-fancybox="gallery" data-caption="{{ $photo->title }}">
+                                    <img src="{{ $media->getUrl('thumb') }}" alt="{{ $photo->title }}" class="img-fluid w-100 transition-all duration-700 group-hover-scale" style="height: 350px; object-fit: cover;" onerror="this.src='{{ $media->getUrl() }}';">
+
+                                    <!-- Elegant Dark Gradient Overlay (Subtle) -->
+                                    <div class="photo-overlay position-absolute w-100 h-100 d-flex flex-column justify-content-end p-4 transition-all duration-500 opacity-0 group-hover-opacity-100" style="bottom: 0; left: 0; background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);">
+                                        <h4 class="text-white font-weight-bold mb-1">{{ $photo->title }}</h4>
+                                        @if($photo->description)
+                                            <p class="text-white-50 small mb-0">{{ Str::limit($photo->description, 60) }}</p>
+                                        @endif
+                                        <div class="zoom-icon text-white mt-3">
+                                            <i class="fas fa-search-plus fa-2x"></i>
+                                        </div>
+                                    </div>
+                                </a>
                             </div>
                         </div>
                     @endif
                 @empty
-                    <div class="col-12 text-center py-5">
-                        <h3>Aucune photo disponible pour le moment.</h3>
+                    <div class="col-12 text-center py-5 text-muted">
+                        <i class="fas fa-camera-retro fa-4x mb-4 opacity-20"></i>
+                        <h3>L'exposition est en cours de préparation.</h3>
                     </div>
                 @endforelse
             </div>
 
             <!-- Styled Pagination -->
-            <div class="styled-pagination text-center">
+            <div class="styled-pagination text-center mt-5">
                 {{ $photos->links('vendor.pagination.custom') }}
             </div>
         </div>
     </section>
-    <!-- End Portfolio Section -->
-@endsection
 
-@section('extra_js')
-<script>
-    jQuery(document).ready(function($) {
-        // Test direct click binding
-        $('[data-fancybox="gallery"]').on('click', function(e) {
-            console.log('[DEBUG] Click detected on image link!', this.href);
-        });
-
-        $('[data-fancybox="gallery"]').fancybox({
-            animationEffect: 'fade',
-            transitionEffect: 'slide',
-            buttons: ['zoom','slideShow','fullScreen','download','thumbs','close']
-        });
-
-        // Also try manual trigger approach
-        $('.lightbox-image').on('click', function(e) {
-            e.preventDefault();
-            var href = $(this).attr('href');
-            console.log('[DEBUG] Manual click, opening:', href);
-            $.fancybox.open({
-                src: href,
-                type: 'image'
-            });
-        });
-    });
-</script>
+    <!-- Bottom Sticky Nav -->
+    <div class="service-nav-sticky bg-white shadow-lg border-top py-3">
+        <div class="auto-container">
+            <div class="d-flex justify-content-center align-items-center flex-wrap">
+                <a href="{{ route('cooprom.gallery_photos') }}" class="btn btn-link text-danger font-weight-bold px-3 border-bottom border-danger">Photos</a>
+                <a href="{{ route('cooprom.gallery_videos') }}" class="btn btn-link text-muted px-3">Vidéos</a>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('extra_css')
 <style>
-    .portfolio_image {
-        width: 100%;
-        height: 250px;
-        object-fit: contain;
-        background-color: #f8f9fa;
-        transition: all 0.3s ease;
-        display: block;
+    .bg-white { background-color: #ffffff; }
+    .z-index-1 { z-index: 1; }
+    .tracking-widest { letter-spacing: 0.5em; }
+    .rounded-xl { border-radius: 15px !important; }
+    .shadow-lg { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important; }
+
+    .text-transparent-stroke-white {
+        -webkit-text-stroke: 1px white;
+        color: transparent;
     }
-    .portfolio-block-three .inner-box {
-        border: 1px solid #eee;
-        border-radius: 8px;
-        overflow: hidden;
-        background: #fff;
-    }
-    .portfolio-block-three .image-box {
-        position: relative;
-        overflow: hidden;
-        background: #f8f9fa;
-    }
-    .portfolio-block-three .image-box .image {
-        margin: 0;
-    }
-    .portfolio-block-three .inner-box:hover .portfolio_image {
-        transform: scale(1.05);
-    }
-    .portfolio-block-three .image-box:after {
-        content: "\f00e";
-        font-family: "Font Awesome 5 Free";
-        font-weight: 900;
-        font-size: 20px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0);
-        background: rgba(250, 88, 77, 0.9);
-        color: #fff;
-        width: 50px;
-        height: 50px;
-        line-height: 50px;
-        text-align: center;
-        border-radius: 50%;
-        transition: all 0.3s ease;
-        pointer-events: none;
-        z-index: 2;
-    }
-    .portfolio-block-three .inner-box:hover .image-box:after {
-        transform: translate(-50%, -50%) scale(1);
-    }
-    .portfolio-block-three .lower-content {
-        padding: 20px;
-    }
+
+    .animate-up { opacity: 0; animation: fadeInUp 1s forwards; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+    .group-hover-scale { transition: transform 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); }
+    .art-photo-card:hover .group-hover-scale { transform: scale(1.1); }
+
+    .photo-overlay { transform: translateY(10px); }
+    .art-photo-card:hover .photo-overlay { transform: translateY(0); opacity: 1 !important; }
+
+    .duration-700 { transition-duration: 700ms; }
+
+    .service-nav-sticky { position: sticky; bottom: 0; z-index: 100; }
 </style>
 @endsection
 

@@ -17,8 +17,11 @@ use App\Http\Controllers\Admin\LegalConsultationController;
 use App\Http\Controllers\Admin\SolidarityFundController;
 use App\Http\Controllers\Admin\HealthInsuranceController;
 use App\Http\Controllers\Admin\RetirementController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\MediaLibraryController;
 use App\Http\Controllers\Front\Page\GalleryController;
+use App\Http\Controllers\Front\Page\ContactController;
+use App\Http\Controllers\Front\EventController as FrontEventController;
 use App\Http\Controllers\Front\Auth\RegisterController;
 use App\Http\Controllers\Front\Auth\LoginController;
 use App\Http\Controllers\Front\Member\DashboardController as MemberDashboardController;
@@ -32,9 +35,19 @@ use App\Http\Controllers\Front\Member\LegalConsultationController as MemberLegal
 use App\Http\Controllers\Front\Member\SocialAssistanceController as MemberSocialAssistanceController;
 use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
 use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
+use App\Http\Controllers\Admin\EventController as AdminEventController;
 
 
 Route::get('/', [HomeController::class,'index'])->name('home');
+
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
+// Événements
+Route::get('/evenements', [FrontEventController::class, 'index'])->name('events.index');
+Route::get('/evenements/{slug}', [FrontEventController::class, 'show'])->name('events.show');
+Route::get('/evenements/{slug}/pass', [FrontEventController::class, 'downloadPass'])->name('events.download-pass')->middleware('auth');
+Route::post('/evenements/{slug}/inscription', [FrontEventController::class, 'register'])->name('events.register')->middleware('auth');
 
 // Auth Front
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
@@ -180,10 +193,23 @@ Route::prefix('cp-admin-access')->name('admin.')->group(function () {
         // Médiathèque
         Route::resource('media-library', MediaLibraryController::class);
 
+        // Partenaires
+        Route::resource('partners', PartnerController::class);
+
+        // Messages Contacts
+        Route::resource('contacts', App\Http\Controllers\Admin\ContactController::class)->only(['index', 'show', 'destroy'])->parameters([
+            'contacts' => 'uuid'
+        ]);
+
         // Agenda & Rendez-vous
         Route::get('/appointments/list', [AdminAppointmentController::class, 'listEvents'])->name('appointments.list');
         Route::get('/appointments/related-items/{user}', [AdminAppointmentController::class, 'getRelatedItems'])->name('appointments.related-items');
         Route::resource('appointments', AdminAppointmentController::class);
+
+        // Événements
+        Route::resource('events', AdminEventController::class);
+        Route::get('events/{event}/participants', [AdminEventController::class, 'participants'])->name('events.participants');
+        Route::patch('events/{event}/participants/{user}', [AdminEventController::class, 'updateParticipantStatus'])->name('events.update-participant');
 
         // Notifications
         Route::get('/notifications', [AdminNotificationController::class, 'index'])->name('notifications.index');

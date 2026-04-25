@@ -1,106 +1,135 @@
 @extends('front.layouts.app')
 
-@section('title', 'Aide Sociale - COOPROM | Solidarité aux Adhérents')
+@section('title', 'Aide Sociale - COOPROM | Solidarité & Bienveillance')
 
 @section('content')
-    <!-- Page Title -->
-    <section class="page-title" style="background-image: url({{ asset('assets/front/images/background/7.jpg') }});">
-        <div class="auto-container">
-            <div class="content-box">
-                <div class="title">
-                    <h1>Aide Sociale</h1>
+    <!-- Social Hero Section -->
+    <section class="social-hero position-relative d-flex align-items-center text-white overflow-hidden" style="min-height: 70vh; background: #964b48;">
+        <!-- Pattern background decoration -->
+        <div class="position-absolute w-100 h-100 opacity-10" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
+
+        <div class="auto-container position-relative z-index-1">
+            <div class="row align-items-center">
+                <div class="col-lg-7 animate-left">
+                    <h5 class="font-weight-bold text-uppercase mb-3 tracking-widest text-white-50">L'Esprit Coopératif</h5>
+                    <h1 class="display-3 font-weight-bold mb-4">Solidarité & <br><span class="text-white">Bienveillance</span></h1>
+                    <p class="lead mb-5 text-white" style="opacity: 0.95;">La COOPROM, c'est avant tout une famille. Nous veillons au bien-être social de nos artistes, car une création sereine nait d'une vie protégée.</p>
+                    <a href="{{ route('contact') }}" class="btn btn-outline-white btn-lg rounded-pill px-5 shadow-lg">Nous contacter</a>
                 </div>
-                <ul class="page-breadcrumb">
-                    <li><a href="/">Accueil</a></li>
-                    <li>Assistance</li>
-                    <li>Social</li>
-                </ul>
-            </div>
-        </div>
-    </section>
-
-    <!-- Service Detail Section -->
-    <section class="service-detail-section py-5">
-        <div class="auto-container py-4">
-            <div class="row">
-                <!-- Sidebar Column -->
-                <div class="sidebar-side col-lg-4 col-md-12 col-sm-12">
-                    <aside class="sidebar bg-light p-4 rounded shadow-sm">
-                        <div class="sidebar-widget categories-widget">
-                            <div class="widget-content">
-                                <ul class="services-categories">
-                                    <li><a href="{{ route('assistance.visa') }}">Assistance Visa</a></li>
-                                    <li><a href="{{ route('assistance.legal') }}">Conseil Juridique</a></li>
-                                    <li class="active"><a href="{{ route('assistance.social') }}">Aide Sociale</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="sidebar-widget help-widget mt-4">
-                            <div class="widget-content bg-dark text-white p-4 rounded text-center">
-                                <div class="icon-box mb-3"><span class="fas fa-heart text-danger h1"></span></div>
-                                <h4 class="text-white">Cœur Solidaire</h4>
-                                <p class="small">La COOPROM, c'est aussi une famille qui soutient ses membres dans les moments difficiles.</p>
-                                <a href="#" class="theme-btn btn-style-one bg_red btn-sm mt-3"><span class="btn-title">Nous contacter</span></a>
-                            </div>
-                        </div>
-                    </aside>
-                </div>
-
-                <!-- Content Column -->
-                <div class="content-side col-lg-8 col-md-12 col-sm-12">
-                    <div class="service-details pl-lg-4">
-                        <div class="image-box mb-5">
-                            <figure class="image rounded shadow-lg overflow-hidden"><img src="{{ asset('assets/front/images/resource/image-1.jpg') }}" alt="Aide Sociale COOPROM"></figure>
-                        </div>
-                        <div class="sec-title-two mb-4">
-                            <span class="title text-danger">SOLIDARITÉ & ENTRAIDE</span>
-                            <h2 class="font-weight-bold">Une assistance sociale au service de l'adhérent</h2>
-                        </div>
-                        <div class="text text-justify" style="line-height: 1.8;">
-                            <p class="mb-4">Au-delà de la promotion et de la production, la COOPROM apporte une assistance sociale à ses adhérents. Nous croyons que le bien-être social de l'artiste est le socle de sa créativité.</p>
-                            <p class="mb-4">Conformément à nos valeurs de coopérative, nous mettons en place des mécanismes de soutien pour accompagner nos membres dans leur vie quotidienne et professionnelle.</p>
-                        </div>
-
-                        <!-- Social Benefits -->
-                        <div class="row mt-5">
-                            <div class="col-md-6 mb-4">
-                                <div class="benefit-box p-4 bg-white shadow-sm rounded h-100 border-top border-danger transition-y text-center">
-                                    <div class="icon text-danger h1 mb-3"><i class="fas fa-hand-holding-heart"></i></div>
-                                    <h5 class="font-weight-bold">Soutien Moral</h5>
-                                    <p class="small text-muted">Écoute et orientation pour les artistes en situation de fragilité.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="benefit-box p-4 bg-white shadow-sm rounded h-100 border-top border-danger transition-y text-center">
-                                    <div class="icon text-danger h1 mb-3"><i class="fas fa-medkit"></i></div>
-                                    <h5 class="font-weight-bold">Accompagnement Aide</h5>
-                                    <p class="small text-muted">Mécanismes d'aide ponctuelle selon les besoins de l'adhérent.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="sec-title-two mt-5 mb-4">
-                            <h3 class="font-weight-bold">Nos Engagements Sociaux</h3>
-                        </div>
-                        <ul class="list-style-three">
-                            <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-danger mr-3"></i> Mise en réseau pour la solidarité entre membres.</li>
-                            <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-danger mr-3"></i> Information sur la protection sociale de l'artiste.</li>
-                            <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-danger mr-3"></i> Aide à la résolution de problématiques matérielles.</li>
-                        </ul>
+                <div class="col-lg-5 d-none d-lg-block animate-right">
+                    <div class="hero-icon-box text-center">
+                        <i class="fas fa-hand-holding-heart fa-15x opacity-20"></i>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- Values Section -->
+    <section class="py-5 bg-white overflow-hidden">
+        <div class="auto-container py-5">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-5 mb-lg-0 animate-left">
+                    <div class="image-box position-relative p-4">
+                        <div class="heart-shape-bg position-absolute" style="width: 100%; height: 100%; top:0; left:0; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); z-index: 1; opacity: 0.2; background-color: #964b48;"></div>
+                        <img src="{{ asset('assets/front/images/resource/social_aide_resized.jpeg') }}" alt="Social" class="img-fluid rounded-3xl shadow-2xl position-relative z-index-2 transform-hover-float">
+                    </div>
+                </div>
+                <div class="col-lg-6 animate-right">
+                    <div class="pl-lg-5">
+                        <div class="sec-title-modern mb-4">
+                            <h2 class="display-5 font-weight-bold">Plus qu'une Institution, <br><span style="color: #964b48;">Une Famille</span></h2>
+                        </div>
+                        <p class="text-dark mb-4 lead" style="line-height: 1.8;">
+                            Nous croyons que le bien-être social de l'artiste est le socle de sa créativité. Conformément à nos valeurs de coopérative, nous mettons en place des mécanismes de soutien concrets.
+                        </p>
+
+                        <div class="feature-checks mt-5">
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-check-circle mr-3 fa-lg" style="color: #964b48;"></i>
+                                <span class="font-weight-bold">Écoute et orientation personnalisée</span>
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <i class="fas fa-check-circle mr-3 fa-lg" style="color: #964b48;"></i>
+                                <span class="font-weight-bold">Mise en réseau solidaire entre membres</span>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-check-circle mr-3 fa-lg" style="color: #964b48;"></i>
+                                <span class="font-weight-bold">Information sur la protection sociale</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Support Mechanism (Creative Grid) -->
+    <section class="py-5 bg-light">
+        <div class="auto-container py-5">
+            <div class="sec-title text-center mb-5 pb-5">
+                <h2 class="font-weight-bold display-5">Nos Mécanismes de Soutien</h2>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-6 mb-4 animate-up">
+                    <div class="social-card p-5 bg-white h-100 rounded-2xl shadow-sm hover-shadow-xl transition-all border-left-5" style="border-left-color: #964b48 !important;">
+                        <div class="icon mb-4" style="color: #964b48;"><i class="fas fa-heartbeat fa-3x"></i></div>
+                        <h4 class="font-weight-bold mb-3">Soutien Moral</h4>
+                        <p class="text-muted">Un service dédié pour accompagner les artistes traversant des périodes de fragilité ou de doute dans leur carrière.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4 animate-up" style="animation-delay: 0.2s;">
+                    <div class="social-card p-5 bg-dark text-white h-100 rounded-2xl shadow-xl transition-all">
+                        <div class="icon text-danger mb-4"><i class="fas fa-plus-square fa-3x"></i></div>
+                        <h4 class="font-weight-bold mb-3 text-white">Aide Ponctuelle</h4>
+                        <p class="text-white" style="opacity: 0.9;">Activation de fonds de solidarité et assistance matérielle lors d'événements de vie majeurs de nos adhérents.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Sticky Nav -->
+    <div class="service-nav-sticky bg-white shadow-lg border-top py-3">
+        <div class="auto-container">
+            <div class="d-flex justify-content-center align-items-center flex-wrap">
+                <a href="{{ route('assistance.visa') }}" class="btn btn-link text-muted px-3">Visa</a>
+                <a href="{{ route('assistance.legal') }}" class="btn btn-link text-muted px-3">Juridique</a>
+                <a href="{{ route('assistance.social') }}" class="btn btn-link text-danger font-weight-bold px-3 border-bottom border-danger">Social</a>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('extra_css')
 <style>
-    .services-categories { list-style: none; padding-left: 0; }
-    .services-categories li { border-bottom: 1px solid #eee; }
-    .services-categories li a { display: block; padding: 12px 0; color: #333; transition: 0.3s; font-weight: 500; }
-    .services-categories li.active a, .services-categories li a:hover { color: #ff3c36; padding-left: 10px; }
-    .transition-y:hover { transform: translateY(-10px); transition: 0.3s; }
+    .z-index-1 { z-index: 1; }
+    .z-index-2 { z-index: 2; }
+    .tracking-widest { letter-spacing: 0.4em; }
+    .rounded-3xl { border-radius: 40px !important; }
+    .rounded-2xl { border-radius: 25px !important; }
+    .rounded-xl { border-radius: 15px !important; }
+    .border-left-5 { border-left: 5px solid !important; }
+    .bg-light-danger { background-color: rgba(255, 60, 54, 0.05); }
+
+    .animate-up { opacity: 0; animation: fadeInUp 1s forwards; }
+    .animate-left { opacity: 0; animation: fadeInLeft 1s forwards; }
+    .animate-right { opacity: 0; animation: fadeInRight 1s forwards; }
+
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes fadeInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+
+    .transform-hover-float:hover { transform: translateY(-10px) rotate(1deg); transition: 0.5s; }
+
+    .social-card:hover { transform: scale(1.02); }
+    .hover-shadow-xl:hover { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1) !important; }
+
+    .btn-outline-white { border: 2px solid white; color: white; transition: 0.3s; }
+    .btn-outline-white:hover { background: white; color: #ff3c36; }
+
+    .fa-15x { font-size: 15rem; }
+    .service-nav-sticky { position: sticky; bottom: 0; z-index: 100; }
 </style>
 @endsection

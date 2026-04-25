@@ -101,4 +101,12 @@ class User extends BaseModel
     {
         return $this->hasMany(VisaApplication::class);
     }
+
+    /**
+     * Les événements auxquels l'utilisateur est inscrit.
+     */
+    public function events()
+    {
+        return $this->belongsToMany(Event::class)->withPivot('notes', 'status')->withTimestamps();
+    }
 }

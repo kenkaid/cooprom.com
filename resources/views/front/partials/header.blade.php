@@ -1,302 +1,265 @@
-    <header class="main-header header-style-two">
-        <!-- Header top -->
-        <div class="header-top">
-            <div class="inner-container">
-                <div class="top-left">
-                    <div class="service-num">
-                            <a href="tel:+2250102030405"><i class="fa fa-phone"></i> +225 01 02 03 04 05</a>
-                            <div class="text">Contactez-nous pour toute question</div>
-                        </div>
+<!-- ULTRA-MINIMAL HIGH-END HEADER COOPROM -->
+<header class="cooprom-minimal-header">
+    <div class="header-inner">
+        <div class="auto-container">
+            <div class="nav-flex-wrapper d-flex align-items-center justify-content-between">
+
+                <!-- Brand (Solo Logo) -->
+                <div class="brand-logo">
+                    <a href="/">
+                        <img src="{{ asset('assets/front/images/logo.jpg') }}" alt="COOPROM" class="minimal-logo-img">
+                    </a>
                 </div>
-                <div class="top-right">
-                    <ul class="contact-list">
-                        <li><a href="mailto:contact@cooprom.org"><i class="fa fa-envelope"></i> contact@cooprom.org</a></li>
-                        <li><i class="fa fa-map-marker-alt"></i> Abidjan, Côte d'Ivoire</li>
-                        @auth
-                            <li class="dropdown" style="margin-left: 10px; position: relative;">
-                                <a href="#" class="dropdown-toggle no-caret" data-toggle="dropdown" style="color: #333; font-size: 18px; position: relative; display: inline-block;">
-                                    <i class="fa fa-bell"></i>
-                                    <span id="notification-count" class="badge badge-danger" style="position: absolute; top: -5px; right: -8px; font-size: 9px; border-radius: 50%; padding: 2px 5px; min-width: 15px; height: 15px; display: flex; align-items: center; justify-content: center; {{ auth()->user()->unreadNotifications->count() > 0 ? '' : 'display: none;' }}">
-                                        {{ auth()->user()->unreadNotifications->count() }}
-                                    </span>
-                                </a>
-                                <style>
-                                    .header-top .dropdown-toggle.no-caret::after {
-                                        display: none !important;
-                                    }
-                                </style>
-                                <div class="dropdown-menu dropdown-menu-right shadow-lg border-0" style="min-width: 300px; border-radius: 10px; padding: 0;">
-                                    <div class="p-3 border-bottom d-flex justify-content-between align-items-center">
-                                        <h6 class="mb-0 font-weight-bold">Notifications</h6>
-                                        <a href="{{ route('member.notifications.index') }}" class="small text-info">Tout voir</a>
-                                    </div>
-                                    <div id="notification-list" style="max-height: 300px; overflow-y: auto;">
-                                        @forelse(auth()->user()->unreadNotifications->take(5) as $notification)
-                                            <a href="{{ route('member.notifications.index') }}" class="dropdown-item p-3 border-bottom d-flex align-items-start" style="white-space: normal;">
-                                                <div class="bg-light text-info rounded-circle d-flex align-items-center justify-content-center mr-3" style="width: 35px; height: 35px; flex-shrink: 0;">
-                                                    <i class="fa {{ $notification->data['icon'] ?? 'fa-bell' }}" style="font-size: 14px;"></i>
-                                                </div>
-                                                <div style="flex-grow: 1;">
-                                                    <div class="small font-weight-bold">{{ $notification->data['title'] ?? 'Notification' }}</div>
-                                                    <div class="small text-muted">{{ Str::limit($notification->data['message'] ?? '', 50) }}</div>
-                                                    <div class="very-small text-muted mt-1" style="font-size: 10px;">{{ $notification->created_at->diffForHumans() }}</div>
-                                                </div>
-                                            </a>
-                                        @empty
-                                            <div class="p-4 text-center text-muted small">Aucune nouvelle notification</div>
-                                        @endforelse
-                                    </div>
-                                    @if(auth()->user()->unreadNotifications->count() > 0)
-                                        <form action="{{ route('member.notifications.mark-all-read') }}" method="POST" class="p-2 text-center border-top">
-                                            @csrf
-                                            <button type="submit" class="btn btn-link btn-sm text-muted p-0" style="font-size: 11px;">Marquer tout comme lu</button>
-                                        </form>
-                                    @endif
-                                </div>
-                            </li>
-                            <li class="btn-box" style="margin-left: 10px;">
-                                <a href="{{ route('member.dashboard') }}" class="theme-btn btn-style-one" style="padding: 5px 15px; line-height: 1.1; font-size: 12px; border-radius: 30px; background-color: #fa584d; color: #fff; display: inline-flex; align-items: center; justify-content: center;">
-                                    <span class="btn-title" style="color: #fff; display: flex; align-items: center;"><i class="fa fa-user-circle" style="margin-right: 5px;"></i> Mon Espace</span>
-                                </a>
-                            </li>
-                        @else
-                            <li class="btn-box" style="margin-left: 10px;">
-                                <a href="{{ route('login') }}" class="theme-btn btn-style-one" style="padding: 5px 15px; line-height: 1.1; font-size: 12px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 30px; display: inline-flex; align-items: center; justify-content: center;">
-                                    <span class="btn-title" style="color: #155724; display: flex; align-items: center;"><i class="fa fa-lock" style="margin-right: 5px;"></i> Connexion</span>
-                                </a>
-                            </li>
-                            <li class="btn-box" style="margin-left: 5px;">
-                                <a href="{{ route('register') }}" class="theme-btn btn-style-one" style="padding: 5px 15px; line-height: 1.1; font-size: 12px; border-radius: 30px; background-color: #ffb347; color: #fff; display: inline-flex; align-items: center; justify-content: center;">
-                                    <span class="btn-title" style="display: flex; align-items: center;"><i class="fa fa-user-plus" style="margin-right: 5px;"></i> Devenir Adhérent</span>
-                                </a>
-                            </li>
-                        @endauth
+
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav d-none d-lg-block">
+                    <ul class="nav-links d-flex align-items-center mb-0 list-unstyled">
+                        <li class="{{request()->routeIs('home') ? 'active' : ''}}"><a href="/">Accueil</a></li>
+                        <li class="{{request()->routeIs('events.*') ? 'active' : ''}}"><a href="{{ route('events.index') }}">Agenda</a></li>
+
+                        <li class="nav-dropdown">
+                            <a href="#">Coopérative <i class="fa fa-chevron-down small ml-1" style="font-size: 8px;"></i></a>
+                            <ul class="dropdown-list shadow-lg list-unstyled">
+                                <li><a href="{{ route('cooprom.presentation') }}">Présentation</a></li>
+                                <li><a href="{{ route('cooprom.missions') }}">Missions</a></li>
+                                <li><a href="{{ route('cooprom.partenaires') }}">Partenaires</a></li>
+                                <li><a href="{{ route('cooprom.gallery_photos') }}">Photos</a></li>
+                                <li><a href="{{ route('cooprom.gallery_videos') }}">Vidéos</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-dropdown">
+                            <a href="#">Expertises <i class="fa fa-chevron-down small ml-1" style="font-size: 8px;"></i></a>
+                            <ul class="dropdown-list shadow-lg list-unstyled">
+                                <li><a href="{{ route('services.promotion') }}">Promotion</a></li>
+                                <li><a href="{{ route('services.production') }}">Production</a></li>
+                                <li><a href="{{ route('services.travels') }}">Voyages</a></li>
+                                <li><a href="{{ route('services.events') }}">Événementiel</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-dropdown">
+                            <a href="#">Assistance <i class="fa fa-chevron-down small ml-1" style="font-size: 8px;"></i></a>
+                            <ul class="dropdown-list shadow-lg list-unstyled">
+                                <li><a href="{{ route('assistance.visa') }}">Visa</a></li>
+                                <li><a href="{{ route('assistance.legal') }}">Juridique</a></li>
+                                <li><a href="{{ route('assistance.social') }}">Social</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="{{ request()->routeIs('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
                     </ul>
-                </div>
-            </div>
-        </div>
-        <!-- End Header Top -->
-
-        <!-- Main box -->
-        <div class="main-box">
-            <div class="auto-container">
-                <div class="menu-box">
-                    <div class="logo"><a href="/"><img src="{{ asset('assets/front/images/logo.jpg') }}" alt="COOPROM" title="COOPROM" ></a></div>
-
-                    <!--Nav Box-->
-                    <div class="nav-outer">
-                        <!-- Main Menu -->
-                        <nav class="main-menu navbar-expand-md navbar-light">
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navigation clearfix">
-                                    <li class="{{request()->routeIs("home") ? 'current' : ''}}"><a href="/"><span>Accueil</span></a></li>
-
-                                    <li class="dropdown {{ request()->routeIs('cooprom.*') ? 'current' : '' }}" >
-                                        <a href="#"><span>La Cooprom</span></a>
-                                        <ul class="dropdown-menu">
-                                            <li class="{{request()->routeIs("cooprom.presentation") ? 'current' : ''}}"><a href="{{ route('cooprom.presentation') }}">Présentation</a></li>
-                                            <li class="{{request()->routeIs("cooprom.missions") ? 'current' : ''}}"><a href="{{ route('cooprom.missions') }}">Missions & Objectifs</a></li>
-                                            <li class="{{request()->routeIs("cooprom.partenaires") ? 'current' : ''}}"><a href="{{ route('cooprom.partenaires') }}">Partenaires</a></li>
-                                            <li class="{{request()->routeIs("cooprom.gallery_photos") ? 'current' : ''}}"><a href="{{ route('cooprom.gallery_photos') }}">Gallérie photos</a></li>
-                                            <li class="{{request()->routeIs("cooprom.gallery_videos") ? 'current' : ''}}"><a href="{{ route('cooprom.gallery_videos') }}">Gallérie vidéos</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="dropdown {{ request()->routeIs('services.*') ? 'current' : '' }}">
-                                        <a href="#"><span>Services</span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="{{ route('services.promotion') }}">Promotion Artistique</a></li>
-                                            <li><a href="{{ route('services.production') }}">Production Numérique</a></li>
-                                            <li><a href="{{ route('services.travels') }}">Voyages d'Affaires</a></li>
-                                            <li><a href="{{ route('services.events') }}">Événementiel</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="dropdown {{ request()->routeIs('assistance.*') ? 'current' : '' }}">
-                                        <a href="#"><span>Assistance</span></a>
-                                        <ul class="dropdown-menu">
-                                            <li><a href="{{ route('assistance.visa') }}">Assistance Visa</a></li>
-                                            <li><a href="{{ route('assistance.legal') }}">Conseil Juridique</a></li>
-                                            <li><a href="{{ route('assistance.social') }}">Aide Sociale</a></li>
-                                        </ul>
-                                    </li>
-
-                                    <li class="dropdown d-lg-none {{ request()->routeIs('member.*') ? 'current' : '' }}">
-                                        @auth
-                                            <a href="#"><span>Mon Espace</span></a>
-                                            <ul class="dropdown-menu">
-                                                <li><a href="{{ route('member.dashboard') }}"><i class="fa fa-th-large mr-2"></i> Tableau de bord</a></li>
-                                                <li><a href="{{ route('member.profile.edit') }}"><i class="fa fa-user-circle mr-2"></i> Mon Profil</a></li>
-                                                <li><a href="{{ route('member.productions.index') }}"><i class="fa fa-compact-disc mr-2"></i> Mes Productions</a></li>
-                                                <li><a href="{{ route('member.contracts.index') }}"><i class="fa fa-file-signature mr-2"></i> Mes Contrats</a></li>
-                                                <li><a href="{{ route('member.legal.index') }}"><i class="fa fa-gavel mr-2"></i> Conseil Juridique</a></li>
-                                                <li><a href="{{ route('member.travels.index') }}"><i class="fa fa-plane-departure mr-2"></i> Voyages & Visas</a></li>
-                                                <li><a href="{{ route('member.social.index') }}"><i class="fa fa-hand-holding-heart mr-2"></i> Aide Sociale</a></li>
-                                                <li><a href="{{ route('member.appointments.index') }}"><i class="fa fa-calendar-alt mr-2"></i> Mes Rendez-vous</a></li>
-                                                <li>
-                                                    <form action="{{ route('logout') }}" method="POST" id="logout-form-mobile" style="display: none;">@csrf</form>
-                                                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form-mobile').submit();" class="text-danger">
-                                                        <i class="fa fa-power-off mr-2"></i> Déconnexion
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        @else
-                                            <a href="{{ route('login') }}"><span>Connexion</span></a>
-                                            <a href="{{ route('register') }}"><span>Devenir Adhérent</span></a>
-                                        @endauth
-                                    </li>
-
-                                    <li><a href="#"><span>Contact</span></a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </div>
-
-                    <div class="outer-box">
-                        <div class="service_wrapper">
-                            <span class="icon flaticon-whatsapp"></span>
-                            <p>Vous avez des Questions?</p>
-                            <h4>07 12 12 12 12</h4>
-                        </div>
-
-                        <!-- Search Btn -->
-                        <div class="search-box">
-                            <button class="search-btn"><i class="fa fa-search"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Sticky Header  -->
-        <div class="sticky-header">
-            <div class="main-box">
-                <!--Keep This Empty / Menu will come through Javascript-->
-            </div>
-        </div><!-- End Sticky Menu -->
-
-        <!-- Mobile Header -->
-        <div class="mobile-header">
-            <div class="logo"><a href="{{route('home')}}"><img src="{{ asset('assets/front/images/logo.jpg') }}" alt="" title="" ></a></div>
-
-            <!--Nav Box-->
-            <div class="nav-outer clearfix">
-                <!--Keep This Empty / Menu will come through Javascript-->
-            </div>
-        </div>
-
-        <!-- Mobile Sticky Header -->
-        <div class="mobile-sticky-header">
-            <div class="logo"><a href="{{route('home')}}"><img src="{{ asset('assets/front/images/logo.jpg') }}" alt="" title="" ></a></div>
-
-            <!--Nav Box-->
-            <div class="nav-outer clearfix">
-                <!--Keep This Empty / Menu will come through Javascript-->
-            </div>
-        </div>
-
-        <!-- Mobile Menu  -->
-        <div class="mobile-menu">
-            <style>
-                @media only screen and (min-width: 768px) {
-                    .d-lg-none {
-                        display: none !important;
-                    }
-                }
-                /* Style créatif pour la section Espace Membre et Auth dans le menu mobile */
-                .mobile-menu .navigation li.dropdown.d-lg-none > a,
-                .mobile-menu .navigation li.d-lg-none > a {
-                    background: rgba(250, 88, 77, 0.1);
-                    color: #fa584d !important;
-                    font-weight: 700 !important;
-                    border-left: 4px solid #fa584d;
-                    margin: 10px 15px;
-                    border-radius: 5px;
-                }
-                .mobile-menu .navigation li.dropdown.d-lg-none .dropdown-btn {
-                    color: #fa584d !important;
-                }
-                .mobile-menu .navigation li.dropdown.d-lg-none ul li a {
-                    padding-left: 30px !important;
-                    font-size: 14px;
-                }
-                .mobile-menu .navigation li.dropdown.d-lg-none ul li a i {
-                    width: 20px;
-                    text-align: center;
-                    color: #fa584d;
-                }
-                .mobile-menu .user-profile-mobile {
-                    padding: 20px 15px;
-                    background: #f8f9fa;
-                    border-bottom: 1px solid #eee;
-                    display: flex;
-                    align-items: center;
-                    gap: 15px;
-                }
-                .mobile-menu .user-profile-mobile img {
-                    width: 50px;
-                    height: 50px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    border: 2px solid #fa584d;
-                }
-                .mobile-menu .user-profile-mobile .info h5 {
-                    margin: 0;
-                    font-size: 16px;
-                    font-weight: 700;
-                    color: #333;
-                }
-                .mobile-menu .user-profile-mobile .info span {
-                    font-size: 12px;
-                    color: #777;
-                }
-            </style>
-            <span class="mobile-menu-back-drop"></span>
-            <div class="menu-outer">
-                <nav class="menu-box">
-                    <div class="nav-logo"><a href="{{route('home')}}"><img src="{{ asset('assets/front/images/logo.jpg') }}" alt="" title="" ></a></div><!--Here Menu Will Come Automatically Via Javascript / Same Menu as in Header-->
-
-                    @auth
-                        <div class="user-profile-mobile">
-                            <img src="{{ auth()->user()->photo }}" alt="Avatar">
-                            <div class="info">
-                                <h5>{{ auth()->user()->name }} {{ auth()->user()->last_name }}</h5>
-                                <span>{{ auth()->user()->culturalSector->name ?? 'Membre Adhérent' }}</span>
-                            </div>
-                        </div>
-                    @endauth
                 </nav>
 
-                <div class="menu-search">
-                    <form method="post">
-                        <div class="form-group">
-                            <input type="text" class="input" name="search-field" value="" placeholder="Search..." required="">
-                            <button type="submit"><i class="fa fa-search"></i></button>
+                <!-- Action Area -->
+                <div class="action-area d-flex align-items-center">
+                    @auth
+                        <!-- Minimal Bell -->
+                        <div class="notif-wrapper mr-3">
+                            <a href="{{ route('member.notifications.index') }}" class="position-relative text-dark opacity-50 hover-opacity-100 transition-all">
+                                <i class="fa fa-bell"></i>
+                                @if(auth()->user()->unreadNotifications->count() > 0)
+                                    <span class="minimal-dot"></span>
+                                @endif
+                            </a>
                         </div>
-                    </form>
-                </div>
-            </div>
-        </div><!-- End Mobile Menu -->
 
-        <!-- Header Search -->
-        <div class="search-popup">
-            <span class="search-back-drop"></span>
+                        <div class="user-trigger dropdown">
+                            <a href="#" class="dropdown-toggle no-caret" data-toggle="dropdown">
+                                <img src="{{ auth()->user()->photo }}" alt="User" class="avatar-circle">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow-2xl border-0 mt-3 rounded-xl overflow-hidden">
+                                <div class="px-4 py-3 bg-light border-bottom">
+                                    <span class="d-block font-weight-bold small text-dark">{{ auth()->user()->name }}</span>
+                                    <span class="d-block text-muted" style="font-size: 9px;">{{ auth()->user()->email }}</span>
+                                </div>
+                                <a class="dropdown-item py-2 px-4 small" href="{{ route('member.dashboard') }}"><i class="fas fa-th-large mr-2 opacity-50"></i> Dashboard</a>
+                                <a class="dropdown-item py-2 px-4 small" href="{{ route('member.profile.edit') }}"><i class="fas fa-user-circle mr-2 opacity-50"></i> Profil</a>
+                                <div class="dropdown-divider m-0"></div>
+                                <form action="{{ route('logout') }}" method="POST">@csrf
+                                    <button type="submit" class="dropdown-item py-2 px-4 small text-danger"><i class="fas fa-power-off mr-2"></i> Déconnexion</button>
+                                </form>
+                            </div>
+                        </div>
+                    @else
+                        <a href="{{ route('login') }}" class="login-link d-none d-md-block mr-4 text-dark font-weight-bold">Connexion</a>
+                        <a href="{{ route('register') }}" class="cta-minimal">Nous rejoindre</a>
+                    @endauth
 
-            <div class="search-inner">
-                <div class="auto-container">
-                    <div class="upper-text">
-                        <div class="text">Vous recherchez ?</div>
-                        <button class="close-search"><span class="fa fa-times"></span></button>
+                    <div class="mobile-nav-toggler d-lg-none ml-4 text-dark" style="cursor: pointer; font-size: 22px;">
+                        <i class="fa fa-align-right"></i>
                     </div>
-
-                    <form method="post">
-                        <div class="form-group">
-                            <input type="search" name="search-field" value="" placeholder="Search..." required="">
-                            <button type="submit"><i class="fa fa-search"></i></button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
-        <!-- End Header Search -->
-    </header>
+    </div>
+
+    <!-- PURE CSS MINIMALIST -->
+    <style>
+        /* Force hide old design remnants and conflicting creative styles */
+        .main-header, .header-top, .sticky-header, .mobile-header, .mobile-sticky-header, .search-popup, .header-style-two, .cooprom-creative-header, .creative-mobile-sidebar {
+            display: none !important;
+        }
+
+        /* Padding for content below fixed header */
+        body { padding-top: 92px; }
+        @media (max-width: 991px) { body { padding-top: 80px; } }
+
+        /* Specific fix for member slide header to ensure breadcrumbs are visible */
+        .member-slide-header { padding-top: 60px !important; padding-bottom: 60px !important; }
+
+        .cooprom-minimal-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 99999;
+            padding: 22px 0;
+            transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .cooprom-minimal-header.scrolled {
+            padding: 10px 0;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 30px rgba(0,0,0,0.04);
+        }
+
+        .minimal-logo-img { max-height: 48px; border-radius: 8px; transition: 0.4s; }
+        .scrolled .minimal-logo-img { max-height: 38px; }
+
+        .nav-links li { margin: 0 15px; position: relative; }
+        .nav-links li a {
+            font-size: 11px;
+            font-weight: 700;
+            color: #111 !important;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-decoration: none !important;
+            opacity: 0.5;
+            transition: 0.3s;
+            display: block;
+            padding: 10px 0;
+        }
+        .nav-links li:hover a, .nav-links li.active a { opacity: 1; color: #ff3c36 !important; }
+
+        /* Dropdown Style */
+        .nav-dropdown { position: relative; }
+        .dropdown-list {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(15px);
+            background: white;
+            min-width: 220px;
+            padding: 15px 0;
+            border-radius: 12px;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 100;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            list-style: none;
+        }
+        .nav-dropdown:hover .dropdown-list { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+        .dropdown-list li a {
+            display: block;
+            padding: 8px 25px;
+            font-size: 13px !important;
+            text-transform: none !important;
+            color: #333 !important;
+            opacity: 1 !important;
+            letter-spacing: 0.2px !important;
+            font-weight: 600 !important;
+            text-decoration: none !important;
+        }
+        .dropdown-list li a:hover { background: #fff5f5; color: #ff3c36 !important; padding-left: 30px; }
+
+        /* Actions */
+        .login-link { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; text-decoration: none !important; color: #222 !important; }
+        .cta-minimal {
+            font-size: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 12px 28px;
+            background: #111;
+            color: white !important;
+            border-radius: 6px;
+            text-decoration: none !important;
+            transition: 0.3s;
+        }
+        .cta-minimal:hover { background: #ff3c36; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(255, 60, 54, 0.2); }
+
+        .avatar-circle { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; border: 2px solid #fff; box-shadow: 0 3px 15px rgba(0,0,0,0.1); transition: 0.3s; }
+        .avatar-circle:hover { border-color: #ff3c36; transform: scale(1.05); }
+
+        /* Bell Styles */
+        .notif-wrapper i { font-size: 18px; }
+        .minimal-dot { position: absolute; top: -2px; right: -2px; width: 7px; height: 7px; background: #ff3c36; border-radius: 50%; border: 1.5px solid #fff; }
+        .hover-opacity-100:hover { opacity: 1 !important; }
+        .transition-all { transition: all 0.3s ease; }
+
+        /* Unique Mobile Menu */
+        .cooprom-mobile-overlay-fixed { position: fixed; top:0; right:-100%; width:100%; height:100%; z-index:1000000; transition: 0.5s; visibility:hidden; display: block !important; }
+        .cooprom-mobile-overlay-fixed.is-open { right:0; visibility:visible; }
+        .mobile-backdrop-blur { position:absolute; width:100%; height:100%; background:rgba(0,0,0,0.5); backdrop-filter: blur(5px); }
+        .mobile-nav-panel { position:absolute; right:0; width:80%; max-width:320px; height:100%; background:white; }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            window.addEventListener('scroll', function() {
+                const h = document.querySelector('.cooprom-minimal-header');
+                if (h) {
+                    if (window.scrollY > 40) h.classList.add('scrolled');
+                    else h.classList.remove('scrolled');
+                }
+            });
+
+            const t = document.querySelector('.mobile-nav-toggler');
+            const s = document.querySelector('.cooprom-mobile-overlay-fixed');
+            const b = document.querySelector('.mobile-backdrop-blur');
+            const c = document.querySelector('.close-mobile-nav');
+
+            if(t) t.onclick = () => s.classList.add('is-open');
+            if(b) b.onclick = () => s.classList.remove('is-open');
+            if(c) c.onclick = () => s.classList.remove('is-open');
+        });
+    </script>
+
+    <!-- MOBILE NAVIGATION PANEL -->
+    <div class="cooprom-mobile-overlay-fixed">
+        <div class="mobile-backdrop-blur"></div>
+        <div class="mobile-nav-panel p-4">
+            <div class="d-flex justify-content-between align-items-center mb-5 border-bottom pb-4">
+                <img src="{{ asset('assets/front/images/logo.jpg') }}" height="35" style="border-radius: 5px;">
+                <div class="close-mobile-nav text-dark" style="font-size: 30px; cursor:pointer;">&times;</div>
+            </div>
+
+            <ul class="list-unstyled mb-5">
+                <li class="mb-4"><a href="/" class="h5 text-dark font-weight-bold text-decoration-none">Accueil</a></li>
+                <li class="mb-4"><a href="{{ route('events.index') }}" class="h5 text-dark font-weight-bold text-decoration-none">Agenda</a></li>
+                <li class="mb-4 border-top pt-4">
+                    <span class="small text-danger text-uppercase font-weight-bold">Institution</span>
+                    <div class="mt-3 pl-3">
+                        <a href="{{ route('cooprom.presentation') }}" class="d-block mb-3 text-dark text-decoration-none font-weight-bold">La Coopérative</a>
+                        <a href="{{ route('cooprom.gallery_photos') }}" class="d-block mb-3 text-dark text-decoration-none font-weight-bold">Nos Photos</a>
+                    </div>
+                </li>
+            </ul>
+
+            <div class="mobile-auth-area border-top pt-4">
+                @auth
+                    <a href="{{ route('member.dashboard') }}" class="btn btn-danger w-100 rounded-pill py-3">Espace Membre</a>
+                @else
+                    <a href="{{ route('login') }}" class="btn btn-outline-dark w-100 mb-2 py-3 rounded-pill">Connexion</a>
+                    <a href="{{ route('register') }}" class="btn btn-danger w-100 py-3 rounded-pill">S'inscrire</a>
+                @endauth
+            </div>
+        </div>
+    </div>
+</header>
