@@ -25,7 +25,7 @@
                 <div class="col-lg-6 animate-left">
                     <div class="image-wrapper position-relative">
                         <div class="tech-border position-absolute w-100 h-100 border-2 border-danger rounded-2xl" style="top: -20px; left: -20px; z-index: -1;"></div>
-                        <img src="{{ asset('assets/front/images/resource/service-2.jpg') }}" alt="Innovation" class="img-fluid rounded-2xl shadow-2xl">
+                        <img src="{{ asset('assets/front/images/background/nos_services.jpg') }}" alt="Innovation" class="img-fluid rounded-2xl shadow-2xl">
                     </div>
                 </div>
                 <div class="col-lg-6 mt-5 mt-lg-0 animate-right">

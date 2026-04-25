@@ -26,7 +26,7 @@
             <div class="row align-items-center mb-5 pb-5">
                 <div class="col-lg-6 mb-5 mb-lg-0 animate-left">
                     <div class="image-stack position-relative pr-lg-5">
-                        <img src="{{ asset('assets/front/images/resource/service-4.jpg') }}" alt="Événementiel" class="img-fluid rounded-lg shadow-2xl relative z-index-2">
+                        <img src="{{ asset('assets/front/images/background/nos_services.jpg') }}" alt="Événementiel" class="img-fluid rounded-lg shadow-2xl relative z-index-2">
                         <div class="stack-box position-absolute bg-danger rounded-lg z-index-1" style="bottom: -30px; right: 20px; width: 80%; height: 80%; opacity: 0.1;"></div>
                     </div>
                 </div>
@@ -88,18 +88,18 @@
             <div class="row align-items-center">
                 <div class="col-lg-7 mb-4 mb-lg-0">
                     <h2 class="display-4 font-weight-bold mb-4">Valorisation Folklorique</h2>
-                    <p class="lead mb-5 opacity-75">Une de nos missions prioritaires est la promotion des danses traditionnelles africaines et du terroir ivoirien.</p>
+                    <p class="lead mb-5 text-white" style="opacity: 0.95;">Une de nos missions prioritaires est la promotion des danses traditionnelles africaines et du terroir ivoirien.</p>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <div class="d-flex align-items-center p-3 bg-white bg-opacity-10 rounded border border-white border-opacity-10">
-                                <i class="fas fa-check-circle text-danger mr-3 fa-lg"></i>
-                                <span>Forums Culturels</span>
+                            <div class="d-flex align-items-center p-3 bg-danger bg-opacity-10 rounded border border-danger border-opacity-20" style="border-radius: 10px !important;">
+                                <i class="fas fa-check-circle text-success mr-3 fa-lg"></i>
+                                <span class="text-white font-weight-bold">Forums Culturels</span>
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <div class="d-flex align-items-center p-3 bg-white bg-opacity-10 rounded border border-white border-opacity-10">
-                                <i class="fas fa-check-circle text-danger mr-3 fa-lg"></i>
-                                <span>Tournées Mondiales</span>
+                            <div class="d-flex align-items-center p-3 bg-danger bg-opacity-10 rounded border border-danger border-opacity-20" style="border-radius: 10px !important;">
+                                <i class="fas fa-check-circle text-success mr-3 fa-lg"></i>
+                                <span class="text-white font-weight-bold">Tournées Mondiales</span>
                             </div>
                         </div>
                     </div>

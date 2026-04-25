@@ -27,9 +27,9 @@
                         </p>
                         <div class="hero-actions d-flex align-items-center">
                             @if (!Auth::user())
-                                <a href="{{route('register')}}" class="theme-btn btn-style-one mr-4"><span class="btn-title">Devenir Adhérent</span></a>
+                                <a href="{{route('register')}}" class="theme-btn btn-style-one mr-3 py-2 px-4 shadow-sm" style="font-size: 14px;"><span class="btn-title">Devenir Adhérent</span></a>
                             @endif
-                            <a href="{{ route('events.index') }}" class="btn btn-danger btn-lg rounded-pill px-5 shadow-lg font-weight-bold">
+                            <a href="{{ route('events.index') }}" class="btn btn-danger py-2 px-4 rounded-pill shadow-sm font-weight-bold text-nowrap" style="font-size: 14px;">
                                 <i class="fas fa-calendar-alt mr-2"></i> L'Agenda Culturel
                             </a>
                         </div>
@@ -37,16 +37,16 @@
                     <div class="col-lg-6 d-none d-lg-block">
                         <!-- Floating Elements Decoration -->
                         <div class="hero-floating-elements position-relative">
-                            <div class="float-card card-1 bg-white p-4 rounded-xl shadow-2xl position-absolute animate-bounce" style="top: -150px; right: 10%; width: 250px;">
+                            <div class="float-card card-1 bg-white p-3 rounded-xl shadow-lg position-absolute animate-bounce" style="top: -150px; right: 10%; width: 200px;">
                                 <div class="d-flex align-items-center">
-                                    <div class="icon-sm bg-danger text-white rounded-circle mr-3 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; flex-shrink: 0;"><i class="fas fa-globe"></i></div>
-                                    <div><small class="text-muted d-block">Impact</small><span class="font-weight-bold">Mondial</span></div>
+                                    <div class="icon-sm bg-danger text-white rounded-circle mr-3 d-flex align-items-center justify-content-center" style="width: 35px; height: 35px; flex-shrink: 0;"><i class="fas fa-globe fa-sm"></i></div>
+                                    <div><small class="text-muted d-block" style="font-size: 10px;">Impact</small><span class="font-weight-bold" style="font-size: 13px;">Mondial</span></div>
                                 </div>
                             </div>
-                            <div class="float-card card-2 bg-dark text-white p-4 rounded-xl shadow-2xl position-absolute animate-float" style="bottom: -100px; right: 30%; width: 200px;">
+                            <div class="float-card card-2 bg-dark text-white p-3 rounded-xl shadow-lg position-absolute animate-float" style="bottom: -100px; right: 30%; width: 180px;">
                                 <div class="d-flex align-items-center">
-                                    <div class="icon-sm bg-primary text-white rounded-circle mr-3 d-flex align-items-center justify-content-center" style="width: 45px; height: 45px; flex-shrink: 0;"><i class="fas fa-bolt"></i></div>
-                                    <div><small class="opacity-50 d-block">Vitesse</small><span class="font-weight-bold text-danger">Temps Réel</span></div>
+                                    <div class="icon-sm bg-primary text-white rounded-circle mr-3 d-flex align-items-center justify-content-center" style="width: 35px; height: 35px; flex-shrink: 0;"><i class="fas fa-bolt fa-sm"></i></div>
+                                    <div><small class="opacity-50 d-block" style="font-size: 10px;">Vitesse</small><span class="font-weight-bold text-danger" style="font-size: 13px;">Temps Réel</span></div>
                                 </div>
                             </div>
                         </div>

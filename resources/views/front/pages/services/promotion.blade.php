@@ -15,9 +15,9 @@
                 <div class="col-lg-7 animate-left">
                     <h5 class="text-danger font-weight-bold text-uppercase mb-3 tracking-widest">Expansion Artistique</h5>
                     <h1 class="display-3 font-weight-bold mb-4">Promouvoir <span class="text-transparent-outline">votre Art</span> au-delà des frontières</h1>
-                    <p class="lead mb-5 opacity-75">La COOPROM réinvente la diffusion artistique. Nous créons des ponts stratégiques entre votre créativité et les marchés internationaux.</p>
+                    <p class="lead mb-5 text-white" style="opacity: 0.95;">La COOPROM réinvente la diffusion artistique. Nous créons des ponts stratégiques entre votre créativité et les marchés internationaux.</p>
                     <div class="d-flex align-items-center">
-                        <a href="{{ route('contact') }}" class="theme-btn btn-style-one mr-4">
+                        <a href="{{ route('login') }}" class="theme-btn btn-style-one mr-4">
                             <span class="btn-title">Propulser mon art</span>
                         </a>
                         <div class="play-btn-box d-flex align-items-center">
