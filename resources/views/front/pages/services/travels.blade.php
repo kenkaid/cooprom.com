@@ -11,14 +11,14 @@
         <div class="auto-container position-relative z-index-1 py-4">
             <div class="row">
                 <div class="col-lg-8 animate-left">
-                    <span class="badge bg-danger px-3 py-2 mb-4 text-uppercase tracking-widest shadow-lg">Mobilité & International</span>
-                    <h1 class="display-3 font-weight-bold mb-4 line-height-1">Voyages d'Affaires <br>& Networking</h1>
-                    <p class="lead mb-4 text-white max-width-600" style="opacity: 0.95; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Connectez votre talent aux marchés mondiaux. La COOPROM ouvre les portes de l'expertise étrangère pour nos adhérents.</p>
-                    <div class="hero-btns mt-2">
-                        <a href="{{ route('member.travels.index') }}" class="theme-btn btn-style-one mr-3 shadow-lg">
+                    <span class="badge bg-danger px-3 py-2 mb-4 text-uppercase tracking-widest shadow-lg responsive-badge">Mobilité & International</span>
+                    <h1 class="display-3 font-weight-bold mb-4 line-height-1 responsive-h1">Voyages d'Affaires <br>& Networking</h1>
+                    <p class="lead mb-4 text-white max-width-600 responsive-p" style="opacity: 0.95; text-shadow: 0 2px 10px rgba(0,0,0,0.5);">Connectez votre talent aux marchés mondiaux. La COOPROM ouvre les portes de l'expertise étrangère pour nos adhérents.</p>
+                    <div class="hero-btns mt-2 d-flex align-items-center">
+                        <a href="{{ route('member.travels.index') }}" class="theme-btn btn-style-one mr-3 shadow-lg mobile-btn-small">
                             <span class="btn-title">Mes Demandes <i class="fas fa-passport ml-2"></i></span>
                         </a>
-                        <a href="#details" class="btn btn-outline-white btn-lg rounded-pill px-4 shadow-sm">En savoir plus</a>
+                        <a href="#details" class="btn btn-outline-white btn-lg rounded-pill px-4 shadow-sm mobile-btn-small">En savoir plus</a>
                     </div>
                 </div>
             </div>
@@ -163,5 +163,16 @@
     .service-nav-sticky { position: sticky; bottom: 0; z-index: 100; }
     .btn-outline-white { border: 2px solid white; color: white; transition: 0.3s; }
     .btn-outline-white:hover { background: white; color: #ff3c36; }
+
+    @media (max-width: 767px) {
+        .responsive-h1 { font-size: 2.5rem !important; }
+        .responsive-p { font-size: 1rem !important; }
+        .responsive-badge { font-size: 0.7rem !important; }
+        .premium-hero { min-height: 400px !important; padding: 60px 0 !important; }
+        .display-5 { font-size: 2rem !important; }
+        .mobile-btn-small { padding: 10px 15px !important; font-size: 12px !important; }
+        .mobile-btn-small .btn-title { font-size: 12px !important; }
+        .hero-btns { justify-content: flex-start; }
+    }
 </style>
 @endsection

@@ -9,12 +9,12 @@
         <div class="overlay position-absolute w-100 h-100" style="background: linear-gradient(45deg, rgba(0,0,0,0.8) 0%, rgba(255,60,54,0.4) 100%);"></div>
 
         <div class="auto-container position-relative z-index-1 animate-up">
-            <span class="d-block h5 text-uppercase mb-3 font-weight-bold tracking-widest text-danger">COOPROM SERVICES</span>
-            <h1 class="display-3 font-weight-bold mb-4">Événementiel & Spectacles</h1>
+            <span class="d-block h5 text-uppercase mb-3 font-weight-bold tracking-widest text-dark mobile-small-text">COOPROM SERVICES</span>
+            <h1 class="display-3 font-weight-bold mb-4 responsive-h1">Événementiel & Spectacles</h1>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb justify-content-center bg-transparent p-0">
                     <li class="breadcrumb-item"><a href="/" class="text-white">Accueil</a></li>
-                    <li class="breadcrumb-item active text-danger" aria-current="page">Événementiel</li>
+                    <li class="breadcrumb-item active text-dark" aria-current="page">Événementiel</li>
                 </ol>
             </nav>
         </div>
@@ -167,5 +167,12 @@
     .scale-hover:hover { transform: scale(1.03); }
 
     .service-nav-sticky { position: sticky; bottom: 0; z-index: 100; }
+
+    @media (max-width: 767px) {
+        .responsive-h1 { font-size: 2.5rem !important; }
+        .mobile-small-text { font-size: 0.9rem !important; }
+        .creative-hero-section { height: auto !important; min-height: 300px !important; padding: 60px 0; }
+        .display-4 { font-size: 2rem !important; }
+    }
 </style>
 @endsection

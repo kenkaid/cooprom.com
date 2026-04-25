@@ -9,10 +9,10 @@
         <div class="overlay position-absolute w-100 h-100" style="background: radial-gradient(circle, transparent 0%, rgba(0,0,0,0.8) 100%);"></div>
 
         <div class="auto-container position-relative z-index-1 text-center animate-up">
-            <span class="d-block h5 text-danger font-weight-bold text-uppercase mb-3 tracking-widest">Vision 2030</span>
-            <h1 class="display-3 font-weight-bold mb-4">Missions & <span class="text-transparent-stroke-white">Engagements</span></h1>
+            <span class="d-block h5 text-danger font-weight-bold text-uppercase mb-3 tracking-widest mobile-small-text">Vision 2030</span>
+            <h1 class="display-3 font-weight-bold mb-4 responsive-h1">Missions & <span class="text-transparent-stroke-white">Engagements</span></h1>
             <div class="divider mx-auto bg-danger mb-4" style="width: 80px; height: 5px; border-radius: 10px;"></div>
-            <p class="lead max-width-700 mx-auto text-white" style="opacity: 0.95;">Bâtir un écosystème où chaque artiste africain possède les outils pour conquérir le monde.</p>
+            <p class="lead max-width-700 mx-auto text-white responsive-p" style="opacity: 0.95;">Bâtir un écosystème où chaque artiste africain possède les outils pour conquérir le monde.</p>
         </div>
     </section>
 
@@ -137,5 +137,13 @@
     .hover-shadow-2xl:hover { box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.1) !important; }
 
     .service-nav-sticky { position: sticky; bottom: 0; z-index: 100; }
+
+    @media (max-width: 767px) {
+        .responsive-h1 { font-size: 2.2rem !important; }
+        .responsive-p { font-size: 1rem !important; }
+        .mobile-small-text { font-size: 0.8rem !important; letter-spacing: 0.2em !important; }
+        .missions-hero { height: auto !important; min-height: 350px !important; padding: 60px 0; }
+        .display-5 { font-size: 1.8rem !important; }
+    }
 </style>
 @endsection

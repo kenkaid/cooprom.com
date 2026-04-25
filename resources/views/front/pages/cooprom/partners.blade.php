@@ -9,9 +9,9 @@
         <div class="overlay position-absolute w-100 h-100" style="background: linear-gradient(135deg, rgba(255,60,54,0.6) 0%, rgba(0,0,0,0.9) 100%);"></div>
 
         <div class="auto-container position-relative z-index-1 text-center animate-up">
-            <h5 class="text-danger font-weight-bold text-uppercase mb-3 tracking-widest">Synergie & Excellence</h5>
-            <h1 class="display-3 font-weight-bold mb-4">Notre Réseau de <br><span class="text-transparent-stroke-white">Partenaires</span></h1>
-            <p class="lead max-width-700 mx-auto text-white" style="opacity: 0.95;">Parce que l'union fait la force de l'art, nous bâtissons des alliances stratégiques mondiales.</p>
+            <h5 class="text-danger font-weight-bold text-uppercase mb-3 tracking-widest responsive-h5">Synergie & Excellence</h5>
+            <h1 class="display-3 font-weight-bold mb-4 responsive-h1">Notre Réseau de <br><span class="text-transparent-stroke-white">Partenaires</span></h1>
+            <p class="lead max-width-700 mx-auto text-white responsive-p" style="opacity: 0.95;">Parce que l'union fait la force de l'art, nous bâtissons des alliances stratégiques mondiales.</p>
         </div>
     </section>
 
@@ -127,5 +127,13 @@
     .hover-shadow-xl:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.08) !important; }
 
     .service-nav-sticky { position: sticky; bottom: 0; z-index: 100; }
+
+    @media (max-width: 767px) {
+        .responsive-h1 { font-size: 2.2rem !important; }
+        .responsive-p { font-size: 1rem !important; }
+        .responsive-h5 { font-size: 0.8rem !important; letter-spacing: 0.2em !important; }
+        .partners-hero { height: auto !important; min-height: 350px !important; padding: 60px 0; }
+        .display-5 { font-size: 1.8rem !important; }
+    }
 </style>
 @endsection

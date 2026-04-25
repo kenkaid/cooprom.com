@@ -44,9 +44,9 @@
         <div class="auto-container position-relative z-index-1 text-white">
             <div class="row align-items-center">
                 <div class="col-lg-8 animate-left">
-                    <span class="badge bg-danger px-3 py-2 mb-4 text-uppercase tracking-widest font-weight-bold shadow-lg">L'Institution</span>
-                    <h1 class="display-2 font-weight-bold mb-4 line-height-1">Nous sommes la <br><span class="text-danger">COOPROM</span></h1>
-                    <p class="lead mb-5 text-white" style="opacity: 0.95;">Le partenaire stratégique incontournable pour l'ascension des artistes et la valorisation du patrimoine culturel africain.</p>
+                    <span class="badge bg-danger px-3 py-2 mb-4 text-uppercase tracking-widest font-weight-bold shadow-lg responsive-badge">L'Institution</span>
+                    <h1 class="display-2 font-weight-bold mb-4 line-height-1 responsive-h1">Nous sommes la <br><span class="text-danger">COOPROM</span></h1>
+                    <p class="lead mb-5 text-white responsive-p" style="opacity: 0.95;">Le partenaire stratégique incontournable pour l'ascension des artistes et la valorisation du patrimoine culturel africain.</p>
                 </div>
             </div>
         </div>
@@ -219,5 +219,14 @@
 
     .btn-outline-white { border: 2px solid white; color: white; transition: 0.3s; }
     .btn-outline-white:hover { background: white; color: #ff3c36; }
+
+    @media (max-width: 767px) {
+        .responsive-h1 { font-size: 2.5rem !important; }
+        .responsive-p { font-size: 1rem !important; }
+        .responsive-badge { font-size: 0.8rem !important; }
+        .institution-hero { min-height: 50vh !important; padding: 60px 0; }
+        .display-5 { font-size: 1.8rem !important; }
+        .scrolling-text-box { display: none; }
+    }
 </style>
 @endsection

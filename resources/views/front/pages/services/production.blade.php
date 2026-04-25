@@ -9,9 +9,9 @@
         <div class="glitch-overlay position-absolute w-100 h-100" style="background: linear-gradient(0deg, rgba(255,60,54,0.4) 0%, transparent 100%);"></div>
 
         <div class="auto-container position-relative z-index-1 text-center animate-up">
-            <h5 class="text-danger font-weight-bold text-uppercase mb-3 tracking-widest"><i class="fas fa-microchip mr-2"></i> Future-Ready Art</h5>
-            <h1 class="display-2 font-weight-bold mb-4">Production <span class="text-gradient">Numérique</span></h1>
-            <p class="lead mb-5 max-width-700 mx-auto text-white" style="opacity: 0.95;">Plongez dans l'ère du Temps Réel. La COOPROM propulse votre créativité grâce aux dernières innovations technologiques.</p>
+            <h5 class="text-danger font-weight-bold text-uppercase mb-3 tracking-widest responsive-h5"><i class="fas fa-microchip mr-2"></i> Future-Ready Art</h5>
+            <h1 class="display-2 font-weight-bold mb-4 responsive-h1">Production <span class="text-gradient">Numérique</span></h1>
+            <p class="lead mb-5 max-width-700 mx-auto text-white responsive-p" style="opacity: 0.95;">Plongez dans l'ère du Temps Réel. La COOPROM propulse votre créativité grâce aux dernières innovations technologiques.</p>
             <div class="scroll-indicator animate-bounce">
                 <i class="fas fa-chevron-down fa-2x text-danger"></i>
             </div>
@@ -135,5 +135,13 @@
     .hover-shadow-xl:hover { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1) !important; }
 
     .service-nav-sticky { position: sticky; bottom: 0; z-index: 100; }
+
+    @media (max-width: 767px) {
+        .responsive-h1 { font-size: 2.8rem !important; }
+        .responsive-h5 { font-size: 0.8rem !important; letter-spacing: 0.1em !important; }
+        .responsive-p { font-size: 1rem !important; }
+        .tech-hero { height: auto !important; min-height: 400px !important; padding: 80px 0; }
+        .display-5 { font-size: 2rem !important; }
+    }
 </style>
 @endsection

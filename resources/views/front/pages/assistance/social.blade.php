@@ -12,7 +12,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-7 animate-left">
                     <h5 class="font-weight-bold text-uppercase mb-3 tracking-widest text-white-50">L'Esprit Coopératif</h5>
-                    <h1 class="display-3 font-weight-bold mb-4">Solidarité & <br><span class="text-white">Bienveillance</span></h1>
+                    <h1 class="display-3 font-weight-bold mb-4 responsive-h1">Solidarité & <br><span class="text-white">Bienveillance</span></h1>
                     <p class="lead mb-5 text-white" style="opacity: 0.95;">La COOPROM, c'est avant tout une famille. Nous veillons au bien-être social de nos artistes, car une création sereine nait d'une vie protégée.</p>
                     <a href="{{ route('contact') }}" class="btn btn-outline-white btn-lg rounded-pill px-5 shadow-lg">Nous contacter</a>
                 </div>
@@ -131,5 +131,11 @@
 
     .fa-15x { font-size: 15rem; }
     .service-nav-sticky { position: sticky; bottom: 0; z-index: 100; }
+
+    @media (max-width: 767px) {
+        .responsive-h1 { font-size: 2.2rem !important; }
+        .social-hero { min-height: 40vh !important; padding: 60px 0; }
+        .display-5 { font-size: 1.8rem !important; }
+    }
 </style>
 @endsection
