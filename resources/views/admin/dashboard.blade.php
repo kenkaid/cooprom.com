@@ -3,433 +3,335 @@
 @section('title', 'Tableau de Bord - COOPROM Admin')
 
 @section('content')
-    <div class="row">
-        <div class="col-12 col-lg-8 col-xl-8">
-            <div class="card radius-10">
-                <div class="card-body">
-                    <div class="row row-cols-1 row-cols-lg-2 g-3 align-items-center">
-                        <div class="col">
-                            <h5 class="mb-0">Daily Time Log Activity</h5>
+    <!-- Header Hero Section -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card radius-10 bg-gradient-cosmic text-white shadow-lg overflow-hidden border-0">
+                <div class="card-body p-4 position-relative">
+                    <div class="row align-items-center">
+                        <div class="col-lg-7">
+                            <h2 class="fw-bold mb-1">Bienvenue, {{ auth()->user()->name }} ! 👋</h2>
+                            @php
+                                $periodLabels = [
+                                    'all' => 'Global',
+                                    'today' => "d'aujourd'hui",
+                                    'week' => 'de la semaine',
+                                    'month' => 'du mois',
+                                    'year' => "de l'année",
+                                ];
+                                $currentLabel = $periodLabels[$stats['period']] ?? 'Global';
+                            @endphp
+                            <p class="mb-0 opacity-75">
+                                @if($stats['start_date'] && $stats['end_date'])
+                                    Aperçu du <span class="fw-bold">{{ \Carbon\Carbon::parse($stats['start_date'])->format('d/m/Y') }}</span> au <span class="fw-bold">{{ \Carbon\Carbon::parse($stats['end_date'])->format('d/m/Y') }}</span>
+                                @else
+                                    Aperçu <span class="fw-bold">{{ $currentLabel }}</span>
+                                @endif
+                                de l'activité COOPROM.
+                            </p>
                         </div>
-                        <div class="col">
-                            <div class="d-flex align-items-center justify-content-sm-end gap-3 cursor-pointer">
-                                <div class="font-13"><i class="bi bi-circle-fill text-primary"></i><span class="ms-2">Today</span></div>
-                                <div class="font-13"><i class="bi bi-circle-fill text-success"></i><span class="ms-2">Yestreday</span></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="chart1"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-12 col-lg-4 col-xl-4">
-            <div class="card radius-10">
-                <div class="card-body">
-                    <div class="row g-3 align-items-center">
-                        <div class="col">
-                            <h5 class="mb-0">Weekly Invoices</h5>
-                        </div>
-                    </div>
-                    <div id="chart2"></div>
-                </div>
-            </div>
-        </div>
-    </div><!--end row-->
+                        <div class="col-lg-5 text-lg-end mt-3 mt-lg-0">
+                            <form action="{{ route('admin.dashboard') }}" method="GET" class="d-flex flex-wrap justify-content-lg-end gap-2">
+                                <div class="input-group input-group-sm w-auto shadow-sm radius-30 overflow-hidden">
+                                    <span class="input-group-text bg-white border-0 text-muted small">Du</span>
+                                    <input type="date" name="start_date" value="{{ $stats['start_date'] }}" class="form-control border-0 px-2" style="width: 130px;">
+                                    <span class="input-group-text bg-white border-0 text-muted small">Au</span>
+                                    <input type="date" name="end_date" value="{{ $stats['end_date'] }}" class="form-control border-0 px-2" style="width: 130px;">
+                                    <button type="submit" class="btn btn-white border-0 text-primary"><i class="bi bi-search"></i></button>
+                                </div>
 
-    <div class="row row-cols-1 row-cols-sm-3 row-cols-md-3 row-cols-xl-3 row-cols-xxl-6">
-        <div class="col">
-            <div class="card radius-10">
-                <div class="card-body text-center">
-                    <div class="widget-icon mx-auto mb-3 bg-light-primary text-primary">
-                        <i class="bi bi-chat-left-fill"></i>
+                                <select name="period" class="form-select form-select-sm radius-30 w-auto bg-white border-0 shadow-sm px-3" onchange="this.form.submit()">
+                                    <option value="all" {{ $stats['period'] == 'all' && !($stats['start_date'] && $stats['end_date']) ? 'selected' : '' }}>Toute la période</option>
+                                    <option value="today" {{ $stats['period'] == 'today' ? 'selected' : '' }}>Aujourd'hui</option>
+                                    <option value="week" {{ $stats['period'] == 'week' ? 'selected' : '' }}>Cette semaine</option>
+                                    <option value="month" {{ $stats['period'] == 'month' ? 'selected' : '' }}>Ce mois</option>
+                                    <option value="year" {{ $stats['period'] == 'year' ? 'selected' : '' }}>Cette année</option>
+                                </select>
+                                @if($stats['start_date'] || $stats['period'] != 'all')
+                                    <a href="{{ route('admin.dashboard') }}" class="btn btn-sm btn-light radius-30 shadow-sm"><i class="bi bi-x-circle"></i></a>
+                                @endif
+                            </form>
+                        </div>
                     </div>
-                    <p class="mb-0">Task Completed</p>
-                    <h3 class="mt-4 mb-0">27</h3>
-                    <small class="text-danger">-12%</small>
+                    <!-- Decorative shapes -->
+                    <div class="position-absolute top-0 end-0 p-3 opacity-25">
+                        <i class="bi bi-cpu-fill display-1"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Widgets -->
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 mb-4">
+        <div class="col">
+            <div class="card radius-10 border-0 border-start border-primary border-4 shadow-sm hover-scale transition-all">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <p class="mb-1 text-secondary text-uppercase small fw-bold">Membres Actifs</p>
+                            <h3 class="mb-0 fw-bold">{{ $stats['users'] }}</h3>
+                        </div>
+                        <div class="widgets-icons bg-light-primary text-primary rounded-circle shadow-sm">
+                            <i class="bi bi-people-fill"></i>
+                        </div>
+                    </div>
+                    <div class="mt-3">
+                        <a href="{{ route('admin.users.index') }}" class="text-primary small text-decoration-none">Gérer les membres <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card radius-10">
-                <div class="card-body text-center">
-                    <div class="widget-icon mx-auto mb-3 bg-light-danger text-danger">
-                        <i class="bi bi-hdd-fill"></i>
+            <div class="card radius-10 border-0 border-start border-danger border-4 shadow-sm hover-scale transition-all">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <p class="mb-1 text-secondary text-uppercase small fw-bold">Productions</p>
+                            <h3 class="mb-0 fw-bold">{{ $stats['productions'] }}</h3>
+                        </div>
+                        <div class="widgets-icons bg-light-danger text-danger rounded-circle shadow-sm">
+                            <i class="bi bi-mic-fill"></i>
+                        </div>
                     </div>
-                    <p class="mb-0">New Task</p>
-                    <h3 class="mt-4 mb-0">45</h3>
-                    <small class="text-success">+8%</small>
+                    <div class="mt-3">
+                        <a href="{{ route('admin.productions.index') }}" class="text-danger small text-decoration-none">Suivre les projets <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card radius-10">
-                <div class="card-body text-center">
-                    <div class="widget-icon mx-auto mb-3 bg-light-success text-success">
-                        <i class="bi bi-people-fill"></i>
+            <div class="card radius-10 border-0 border-start border-success border-4 shadow-sm hover-scale transition-all">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <p class="mb-1 text-secondary text-uppercase small fw-bold">Événements</p>
+                            <h3 class="mb-0 fw-bold">{{ $stats['events'] }}</h3>
+                        </div>
+                        <div class="widgets-icons bg-light-success text-success rounded-circle shadow-sm">
+                            <i class="bi bi-calendar-event-fill"></i>
+                        </div>
                     </div>
-                    <p class="mb-0">New Members</p>
-                    <h3 class="mt-4 mb-0">38</h3>
-                    <small class="text-danger">-6.2%</small>
+                    <div class="mt-3">
+                        <a href="{{ route('admin.events.index') }}" class="text-success small text-decoration-none">Agenda culturel <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col">
-            <div class="card radius-10">
-                <div class="card-body text-center">
-                    <div class="widget-icon mx-auto mb-3 bg-light-info text-info">
-                        <i class="bi bi-archive-fill"></i>
+            <div class="card radius-10 border-0 border-start border-warning border-4 shadow-sm hover-scale transition-all">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-grow-1">
+                            <p class="mb-1 text-secondary text-uppercase small fw-bold">Visas en attente</p>
+                            <h3 class="mb-0 fw-bold">{{ $stats['pending_visas'] }}</h3>
+                        </div>
+                        <div class="widgets-icons bg-light-warning text-warning rounded-circle shadow-sm">
+                            <i class="bi bi-globe"></i>
+                        </div>
                     </div>
-                    <p class="mb-0">Project Completed</p>
-                    <h3 class="mt-4 mb-0">61</h3>
-                    <small class="text-success">+9%</small>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10">
-                <div class="card-body text-center">
-                    <div class="widget-icon mx-auto mb-3 bg-light-purple text-purple">
-                        <i class="bi bi-flag-fill"></i>
+                    <div class="mt-3">
+                        <a href="{{ route('admin.visa_applications.index') }}" class="text-warning small text-decoration-none">Traiter les demandes <i class="bi bi-arrow-right ms-1"></i></a>
                     </div>
-                    <p class="mb-0">Total Files</p>
-                    <h3 class="mt-4 mb-0">29</h3>
-                    <small class="text-success">+6%</small>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card radius-10">
-                <div class="card-body text-center">
-                    <div class="widget-icon mx-auto mb-3 bg-light-orange text-orange">
-                        <i class="bi bi-pie-chart-fill"></i>
-                    </div>
-                    <p class="mb-0">Objectives</p>
-                    <h3 class="mt-4 mb-0">32</h3>
-                    <small class="text-success">+12%</small>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-12 col-lg-7 col-xl-7">
-            <div class="card radius-10">
-                <div class="card-body">
-                    <div class="row row-cols-1 row-cols-lg-2 g-3 align-items-center">
-                        <div class="col">
-                            <h5 class="mb-0">My Projects</h5>
+        <!-- Recent Productions -->
+        <div class="col-12 col-xl-8">
+            <div class="card radius-10 shadow-sm border-0 mb-4">
+                <div class="card-header bg-transparent border-0 py-3">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 fw-bold text-dark">Dernières Productions</h5>
                         </div>
-                        <div class="col">
-                            <div class="d-flex align-items-center justify-content-sm-end gap-3 cursor-pointer">
-                                <form>
-                                    <input type="date" class="form-control">
-                                </form>
-                            </div>
+                        <div class="ms-auto">
+                            <a href="{{ route('admin.productions.index') }}" class="btn btn-outline-primary btn-sm radius-30">Voir tout</a>
                         </div>
                     </div>
-                    <form class="mt-3">
-                        <div class="position-relative">
-                            <div class="position-absolute top-50 translate-middle-y search-icon px-3"><i class="bi bi-search"></i></div>
-                            <input class="form-control ps-5" type="text" placeholder="search projects">
-                        </div>
-                    </form>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Artiste</th>
+                                    <th>Titre</th>
+                                    <th>Statut</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($stats['recent_productions'] as $production)
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center gap-3">
+                                                <img src="{{ $production->user->photo }}" class="rounded-circle shadow-sm" width="35" height="35" alt="">
+                                                <h6 class="mb-0 small fw-bold">{{ $production->user->name }}</h6>
+                                            </div>
+                                        </td>
+                                        <td>{{ Str::limit($production->title, 30) }}</td>
+                                        <td>
+                                            @php
+                                                $statusClass = [
+                                                    'pending' => 'bg-light-warning text-warning',
+                                                    'approved' => 'bg-light-success text-success',
+                                                    'rejected' => 'bg-light-danger text-danger',
+                                                ][$production->status] ?? 'bg-light-secondary text-secondary';
+                                            @endphp
+                                            <span class="badge {{ $statusClass }} radius-30 px-3">{{ ucfirst($production->status) }}</span>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.productions.show', $production->uuid) }}" class="btn btn-sm btn-light radius-30"><i class="bi bi-eye-fill"></i></a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center py-3">Aucune production récente</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
 
-                    <div class="row mt-2 g-3">
-                        <div class="col-12 col-lg-6">
-                            <div class="card radius-10 shadow-none border mb-0">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="project-date">
-                                            <p class="mb-0 font-13">July 2, 2020</p>
-                                        </div>
-                                        <div class="dropdown ms-auto">
-                                            <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded font-22 text-option"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="javascript:;">Action</a>
-                                                </li>
-                                                <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                                </li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="text-center my-3">
-                                        <h6 class="mb-0">Web Designing</h6>
-                                        <p class="mb-0">Prototyping</p>
-                                    </div>
-                                    <div class="my-2">
-                                        <p class="mb-1 font-13">Progress</p>
-                                        <div class="progress radius-10" style="height:5px;">
-                                            <div class="progress-bar bg-primary" role="progressbar" style="width: 85%"></div>
-                                        </div>
-                                        <p class="mb-0 mt-1 font-13 text-end">85%</p>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="project-user-groups">
-                                            <img src="{{asset('assets/admin/images/avatars/avatar-1.png')}}" width="35" height="35" class="rounded-circle" alt="">
-                                            <img src="{{asset('assets/admin/images/avatars/avatar-2.png')}}" width="35" height="35" class="rounded-circle" alt="">
-                                        </div>
-                                        <div class="project-user-plus">+</div>
-                                        <div class="py-1 px-3 radius-30 bg-light-primary text-primary ms-auto">2 Days Left</div>
-                                    </div>
-                                </div>
-                            </div>
+            <div class="card radius-10 shadow-sm border-0">
+                <div class="card-header bg-transparent border-0 py-3">
+                    <div class="d-flex align-items-center">
+                        <div>
+                            <h5 class="mb-0 fw-bold text-dark">Derniers Contrats</h5>
                         </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="card radius-10 shadow-none border mb-0">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="project-date">
-                                            <p class="mb-0 font-13">July 5, 2020</p>
-                                        </div>
-                                        <div class="dropdown ms-auto">
-                                            <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded font-22 text-option"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="javascript:;">Action</a>
-                                                </li>
-                                                <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                                </li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="text-center my-3">
-                                        <h6 class="mb-0">Mobile App</h6>
-                                        <p class="mb-0">Shopping</p>
-                                    </div>
-                                    <div class="my-2">
-                                        <p class="mb-1 font-13">Progress</p>
-                                        <div class="progress radius-10" style="height:5px;">
-                                            <div class="progress-bar bg-orange" role="progressbar" style="width: 55%"></div>
-                                        </div>
-                                        <p class="mb-0 mt-1 font-13 text-end">30%</p>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="project-user-groups">
-                                            <img src="{{asset('assets/admin/images/avatars/avatar-1.png')}}" width="35" height="35" class="rounded-circle" alt="">
-                                            <img src="{{asset('assets/admin/images/avatars/avatar-2.png')}}" width="35" height="35" class="rounded-circle" alt="">
-                                        </div>
-                                        <div class="project-user-plus">+</div>
-                                        <div class="py-1 px-3 radius-30 bg-light-orange text-orange ms-auto">2 Days Left</div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="ms-auto">
+                            <a href="{{ route('admin.contracts.index') }}" class="btn btn-outline-primary btn-sm radius-30">Voir tout</a>
                         </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="card radius-10 shadow-none border mb-0">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="project-date">
-                                            <p class="mb-0 font-13">July 10, 2020</p>
-                                        </div>
-                                        <div class="dropdown ms-auto">
-                                            <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded font-22 text-option"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="javascript:;">Action</a>
-                                                </li>
-                                                <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                                </li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="text-center my-3">
-                                        <h6 class="mb-0">Dashboard</h6>
-                                        <p class="mb-0">Medical</p>
-                                    </div>
-                                    <div class="my-2">
-                                        <p class="mb-1 font-13">Progress</p>
-                                        <div class="progress radius-10" style="height:5px;">
-                                            <div class="progress-bar bg-success" role="progressbar" style="width: 45%"></div>
-                                        </div>
-                                        <p class="mb-0 mt-1 font-13 text-end">45%</p>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="project-user-groups">
-                                            <img src="{{asset('assets/admin/images/avatars/avatar-1.png')}}" width="35" height="35" class="rounded-circle" alt="">
-                                            <img src="{{asset('assets/admin/images/avatars/avatar-2.png')}}" width="35" height="35" class="rounded-circle" alt="">
-                                        </div>
-                                        <div class="project-user-plus">+</div>
-                                        <div class="py-1 px-3 radius-30 bg-light-success text-success ms-auto">2 Weeks Left</div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12 col-lg-6">
-                            <div class="card radius-10 shadow-none border mb-0">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div class="project-date">
-                                            <p class="mb-0 font-13">July 10, 2020</p>
-                                        </div>
-                                        <div class="dropdown ms-auto">
-                                            <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded font-22 text-option"></i>
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="javascript:;">Action</a>
-                                                </li>
-                                                <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                                </li>
-                                                <li>
-                                                    <hr class="dropdown-divider">
-                                                </li>
-                                                <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="text-center my-3">
-                                        <h6 class="mb-0">Web Designing</h6>
-                                        <p class="mb-0">Wireframing</p>
-                                    </div>
-                                    <div class="my-2">
-                                        <p class="mb-1 font-13">Progress</p>
-                                        <div class="progress radius-10" style="height:5px;">
-                                            <div class="progress-bar bg-purple" role="progressbar" style="width: 65%"></div>
-                                        </div>
-                                        <p class="mb-0 mt-1 font-13 text-end">65%</p>
-                                    </div>
-                                    <div class="d-flex align-items-center">
-                                        <div class="project-user-groups">
-                                            <img src="{{asset('assets/admin/images/avatars/avatar-1.png')}}" width="35" height="35" class="rounded-circle" alt="">
-                                            <img src="{{asset('assets/admin/images/avatars/avatar-2.png')}}" width="35" height="35" class="rounded-circle" alt="">
-                                        </div>
-                                        <div class="project-user-plus">+</div>
-                                        <div class="py-1 px-3 radius-30 bg-light-purple text-purple ms-auto">1 Week Left</div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-                    </div><!--end row-->
-
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table align-middle mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Membre</th>
+                                    <th>Contrat</th>
+                                    <th>Statut</th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @forelse($stats['recent_contracts'] as $contract)
+                                    <tr>
+                                        <td>{{ $contract->user->name }}</td>
+                                        <td>{{ Str::limit($contract->title, 25) }}</td>
+                                        <td>
+                                            @php
+                                                $cStatusClass = [
+                                                    'draft' => 'bg-light-secondary text-secondary',
+                                                    'sent' => 'bg-light-info text-info',
+                                                    'signed' => 'bg-light-success text-success',
+                                                    'expired' => 'bg-light-danger text-danger',
+                                                ][$contract->status] ?? 'bg-light-secondary text-secondary';
+                                            @endphp
+                                            <span class="badge {{ $cStatusClass }} radius-30 px-3">{{ ucfirst($contract->status) }}</span>
+                                        </td>
+                                        <td class="small">{{ $contract->created_at->format('d/m/Y') }}</td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="4" class="text-center py-3">Aucun contrat récent</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-5 col-xl-5">
-            <div class="card radius-10">
+
+        <!-- Recent Members -->
+        <div class="col-12 col-xl-4">
+            <div class="card radius-10 shadow-sm border-0">
+                <div class="card-header bg-transparent border-0 py-3 text-center">
+                    <h5 class="mb-0 fw-bold text-dark">Nouveaux Membres</h5>
+                    <p class="mb-0 small text-muted">Membres récemment inscrits</p>
+                </div>
                 <div class="card-body">
-                    <div class="row g-3 align-items-center">
-                        <div class="col-9">
-                            <h5 class="mb-0">Client Messages</h5>
-                        </div>
-                        <div class="col-3">
-                            <div class="d-flex align-items-center justify-content-end gap-3 cursor-pointer">
-                                <div class="dropdown">
-                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded font-22 text-option"></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="javascript:;">Action</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                        </li>
-                                    </ul>
+                    <div class="recent-members-list">
+                        @forelse($stats['recent_users'] as $user)
+                            <div class="d-flex align-items-center gap-3 p-3 border-bottom-dashed">
+                                <img src="{{ $user->photo }}" class="rounded-circle shadow-sm" width="50" height="50" alt="">
+                                <div class="flex-grow-1">
+                                    <h6 class="mb-0 fw-bold">{{ $user->name }} {{ $user->last_name }}</h6>
+                                    <p class="mb-0 small text-muted">{{ $user->culturalSector->name ?? 'Secteur non défini' }}</p>
+                                </div>
+                                <div>
+                                    <a href="{{ route('admin.users.show', $user->uuid) }}" class="btn btn-sm btn-outline-secondary rounded-circle"><i class="bi bi-chevron-right"></i></a>
                                 </div>
                             </div>
-                        </div>
+                        @empty
+                            <p class="text-center py-3">Aucun membre récent</p>
+                        @endforelse
                     </div>
-                </div>
-                <div class="client-message">
-                    <div class="d-flex align-items-center gap-3 client-messages-list border-bottom border-top p-3">
-                        <img src="{{asset('assets/admin/images/avatars/avatar-1.png')}}" class="rounded-circle" width="50" height="50" alt="">
-                        <div>
-                            <h6 class="mb-0">Thomas Hardy <span class="text-secondary mb-0 float-end font-13">21 July</span></h6>
-                            <p class="mb-0 font-13">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
+                    <div class="mt-4 text-center">
+                        <a href="{{ route('admin.users.index') }}" class="btn btn-primary btn-sm radius-30 w-100">Gérer tous les membres</a>
                     </div>
-                    <div class="d-flex align-items-center gap-3 client-messages-list border-bottom p-3">
-                        <img src="{{asset('assets/admin/images/avatars/avatar-2.png')}}" class="rounded-circle" width="50" height="50" alt="">
-                        <div>
-                            <h6 class="mb-0">Thomas Hardy <span class="text-secondary mb-0 float-end font-13">21 July</span></h6>
-                            <p class="mb-0 font-13">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3 client-messages-list border-bottom p-3">
-                        <img src="{{asset('assets/admin/images/avatars/avatar-3.png')}}" class="rounded-circle" width="50" height="50" alt="">
-                        <div>
-                            <h6 class="mb-0">Thomas Hardy <span class="text-secondary mb-0 float-end font-13">21 July</span></h6>
-                            <p class="mb-0 font-13">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3 client-messages-list border-bottom p-3">
-                        <img src="{{asset('assets/admin/images/avatars/avatar-4.png')}}" class="rounded-circle" width="50" height="50" alt="">
-                        <div>
-                            <h6 class="mb-0">Thomas Hardy <span class="text-secondary mb-0 float-end font-13">21 July</span></h6>
-                            <p class="mb-0 font-13">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3 client-messages-list border-bottom p-3">
-                        <img src="{{asset('assets/admin/images/avatars/avatar-5.png')}}" class="rounded-circle" width="50" height="50" alt="">
-                        <div>
-                            <h6 class="mb-0">Thomas Hardy <span class="text-secondary mb-0 float-end font-13">21 July</span></h6>
-                            <p class="mb-0 font-13">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3 client-messages-list border-bottom p-3">
-                        <img src="{{asset('assets/admin/images/avatars/avatar-6.png')}}" class="rounded-circle" width="50" height="50" alt="">
-                        <div>
-                            <h6 class="mb-0">Thomas Hardy <span class="text-secondary mb-0 float-end font-13">21 July</span></h6>
-                            <p class="mb-0 font-13">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3 client-messages-list border-bottom p-3">
-                        <img src="{{asset('assets/admin/images/avatars/avatar-7.png')}}" class="rounded-circle" width="50" height="50" alt="">
-                        <div>
-                            <h6 class="mb-0">Thomas Hardy <span class="text-secondary mb-0 float-end font-13">21 July</span></h6>
-                            <p class="mb-0 font-13">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3 client-messages-list border-bottom p-3">
-                        <img src="{{asset('assets/admin/images/avatars/avatar-7.png')}}" class="rounded-circle" width="50" height="50" alt="">
-                        <div>
-                            <h6 class="mb-0">Thomas Hardy <span class="text-secondary mb-0 float-end font-13">21 July</span></h6>
-                            <p class="mb-0 font-13">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3 client-messages-list border-bottom p-3">
-                        <img src="{{asset('assets/admin/images/avatars/avatar-7.png')}}" class="rounded-circle" width="50" height="50" alt="">
-                        <div>
-                            <h6 class="mb-0">Thomas Hardy <span class="text-secondary mb-0 float-end font-13">21 July</span></h6>
-                            <p class="mb-0 font-13">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center gap-3 client-messages-list border-bottom p-3">
-                        <img src="{{asset('assets/admin/images/avatars/avatar-7.png')}}" class="rounded-circle" width="50" height="50" alt="">
-                        <div>
-                            <h6 class="mb-0">Thomas Hardy <span class="text-secondary mb-0 float-end font-13">21 July</span></h6>
-                            <p class="mb-0 font-13">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
-    </div><!--end row-->
+    </div>
+@endsection
+
+@section('extra_css')
+<style>
+    .bg-gradient-cosmic {
+        background: linear-gradient(135deg, #FF3C36 0%, #6a11cb 100%);
+    }
+    .hover-scale:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+    .transition-all {
+        transition: all 0.3s ease-in-out;
+    }
+    .widgets-icons {
+        width: 55px;
+        height: 55px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        border-radius: 12px !important;
+    }
+    .bg-light-primary { background-color: rgba(13, 110, 253, 0.08); }
+    .bg-light-danger { background-color: rgba(255, 60, 54, 0.08); }
+    .bg-light-success { background-color: rgba(25, 135, 84, 0.08); }
+    .bg-light-warning { background-color: rgba(255, 193, 7, 0.08); }
+    .bg-light-info { background-color: rgba(13, 202, 240, 0.08); }
+
+    .border-bottom-dashed {
+        border-bottom: 1px dashed #e9ecef;
+    }
+    .border-bottom-dashed:last-child {
+        border-bottom: none;
+    }
+    .card {
+        border-radius: 15px;
+    }
+    .radius-30 {
+        border-radius: 30px;
+    }
+    .btn-white {
+        background-color: white;
+        border-color: white;
+    }
+    .btn-white:hover {
+        background-color: #f8f9fa;
+    }
+</style>
 @endsection
 
 @section('extra_js')
     <script src="{{asset('assets/admin/plugins/perfect-scrollbar/js/perfect-scrollbar.js')}}"></script>
-    <script src="{{asset('assets/admin/plugins/apexcharts-bundle/js/apexcharts.min.js')}}"></script>
 @endsection

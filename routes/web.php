@@ -147,8 +147,40 @@ Route::prefix('cp-admin-access')->name('admin.')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
     Route::middleware(['auth', 'role:super-admin|admin|staff'])->group(function () {
-        Route::get('/dashboard', function () {
-            return view('admin.dashboard');
+        Route::get('/dashboard', function (Illuminate\Http\Request $request) {
+            $period = $request->query('period', 'all');
+            $startDate = $request->query('start_date');
+            $endDate = $request->query('end_date');
+
+            $queryFilter = function ($query) use ($period, $startDate, $endDate) {
+                if ($startDate && $endDate) {
+                    $query->whereBetween('created_at', [$startDate . ' 00:00:00', $endDate . ' 23:59:59']);
+                } elseif ($period === 'today') {
+                    $query->whereDate('created_at', today());
+                } elseif ($period === 'week') {
+                    $query->whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()]);
+                } elseif ($period === 'month') {
+                    $query->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year);
+                } elseif ($period === 'year') {
+                    $query->whereYear('created_at', now()->year);
+                }
+                return $query;
+            };
+
+            $stats = [
+                'period' => $period,
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+                'users' => $queryFilter(\App\Models\User::role('adhérent'))->count(),
+                'productions' => $queryFilter(\App\Models\Production::query())->count(),
+                'events' => $queryFilter(\App\Models\Event::query())->count(),
+                'visas' => $queryFilter(\App\Models\VisaApplication::query())->count(),
+                'recent_users' => \App\Models\User::role('adhérent')->latest()->take(5)->get(),
+                'recent_productions' => \App\Models\Production::with('user')->latest()->take(5)->get(),
+                'pending_visas' => \App\Models\VisaApplication::where('status', 'pending')->count(),
+                'recent_contracts' => \App\Models\Contract::with('user')->latest()->take(5)->get(),
+            ];
+            return view('admin.dashboard', compact('stats'));
         })->name('dashboard');
 
         // Gestion Utilisateurs
