@@ -3,16 +3,13 @@
 @section('title', 'Mes Conseils Juridiques - COOPROM')
 
 @section('content')
-<section class="page-title" style="background-image: url({{ asset('assets/front/images/background/11.jpg') }});">
-    <div class="auto-container">
-        <h1>Conseil Juridique</h1>
-        <ul class="page-breadcrumb">
-            <li><a href="/">Accueil</a></li>
-            <li><a href="{{ route('member.dashboard') }}">Dashboard</a></li>
-            <li>Conseil Juridique</li>
-        </ul>
-    </div>
-</section>
+
+    @php
+        $image_link = 'assets/front/images/resource/members/legal.jpeg';
+        $title = 'Conseil Juridique';
+        $breadcumb_table = ['Conseil Juridique'];
+    @endphp
+    @include('front.member.partials.slide_header')
 
 <section class="dashboard-section pt-5 pb-5">
     <div class="auto-container">

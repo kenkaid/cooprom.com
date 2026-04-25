@@ -3,16 +3,13 @@
 @section('title', 'Nouveau Projet de Production - COOPROM')
 
 @section('content')
-<section class="page-title" style="background-image: url({{ asset('assets/front/images/background/11.jpg') }});">
-    <div class="auto-container">
-        <h1>Nouvelle Production</h1>
-        <ul class="page-breadcrumb">
-            <li><a href="/">Accueil</a></li>
-            <li><a href="{{ route('member.dashboard') }}">Dashboard</a></li>
-            <li>Soumettre un projet</li>
-        </ul>
-    </div>
-</section>
+
+    @php
+        $image_link = 'assets/front/images/resource/members/production.jpeg';
+        $title = 'Nouvelle Production';
+        $breadcumb_table = ['Soumettre un projet'];
+    @endphp
+    @include('front.member.partials.slide_header')
 
 <section class="dashboard-section pt-5 pb-5">
     <div class="auto-container">
