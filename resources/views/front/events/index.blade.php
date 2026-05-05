@@ -68,16 +68,17 @@
                                 <!-- Status Badge Overlay -->
                                 <div class="status-overlay position-absolute" style="top: 15px; left: 15px;">
                                     @php
+                                        $isPast = $event->start_date->isPast();
                                         $statusLabels = [
-                                            'published' => 'À Venir',
-                                            'open_registration' => 'Inscriptions Ouvertes',
+                                            'published' => $isPast ? 'Terminé' : 'À Venir',
+                                            'open_registration' => $isPast ? 'Terminé' : 'Inscriptions Ouvertes',
                                             'ongoing' => 'En cours',
                                             'completed' => 'Terminé',
                                             'cancelled' => 'Annulé',
                                         ];
                                         $statusColors = [
-                                            'published' => 'bg-info',
-                                            'open_registration' => 'bg-success',
+                                            'published' => $isPast ? 'bg-secondary' : 'bg-info',
+                                            'open_registration' => $isPast ? 'bg-secondary' : 'bg-success',
                                             'ongoing' => 'bg-warning',
                                             'completed' => 'bg-secondary',
                                             'cancelled' => 'bg-danger',

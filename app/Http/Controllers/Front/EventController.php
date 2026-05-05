@@ -83,18 +83,22 @@ class EventController extends Controller
     {
         $event = $this->eventService->getEventBySlug($slug);
 
-        if ($event->status !== 'open_registration') {
-            return back()->with('error', 'Les inscriptions ne sont pas ouvertes pour cet événement.');
+        if (!$event->canRegister()) {
+            if ($event->isPast()) {
+                return back()->with('error', 'Cet événement est déjà passé.');
+            }
+            if ($event->status !== 'open_registration') {
+                return back()->with('error', 'Les inscriptions ne sont pas ouvertes pour cet événement.');
+            }
+            if ($event->isFull()) {
+                return back()->with('error', 'Désolé, cet événement est complet.');
+            }
         }
 
         $user = auth()->user();
 
         if ($user->events()->where('event_id', $event->id)->exists()) {
             return back()->with('warning', 'Vous êtes déjà inscrit à cet événement.');
-        }
-
-        if ($event->isFull()) {
-            return back()->with('error', 'Désolé, cet événement est complet.');
         }
 
         $user->events()->attach($event->id, [

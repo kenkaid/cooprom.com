@@ -57,7 +57,7 @@
                             <li class="nav-item">
                                 <a class="nav-link {{ !$isRegistered ? 'active' : '' }}" id="about-tab" data-toggle="tab" href="#about" role="tab">Présentation</a>
                             </li>
-                            @if($event->status == 'open_registration')
+                            @if($event->canRegister() || $isRegistered)
                             <li class="nav-item">
                                 <a class="nav-link {{ $isRegistered ? 'active' : '' }}" id="register-tab" data-toggle="tab" href="#register" role="tab">Inscription</a>
                             </li>
@@ -118,9 +118,15 @@
 
                                             @if($registrationStatus === 'confirmed')
                                                 <div class="mt-4">
-                                                    <a href="{{ route('events.download-pass', $event->slug) }}" class="btn btn-success btn-lg px-4 shadow-sm">
-                                                        <i class="fas fa-id-badge mr-2"></i> Télécharger mon pass (PDF)
-                                                    </a>
+                                                    @if(!$event->isPast())
+                                                        <a href="{{ route('events.download-pass', $event->slug) }}" class="btn btn-success btn-lg px-4 shadow-sm">
+                                                            <i class="fas fa-id-badge mr-2"></i> Télécharger mon pass (PDF)
+                                                        </a>
+                                                    @else
+                                                        <div class="alert alert-info">
+                                                            <i class="fas fa-info-circle mr-2"></i> L'événement est terminé.
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             @elseif($registrationStatus === 'cancelled')
                                                 <div class="mt-3">
@@ -128,7 +134,7 @@
                                                 </div>
                                             @endif
                                         </div>
-                                    @else
+                                    @elseif($event->canRegister())
                                         <h4 class="mb-3 font-weight-bold">Rejoignez cet événement</h4>
                                         <p class="mb-4 text-muted">Les inscriptions sont actuellement ouvertes. En tant que membre de la COOPROM, vous bénéficiez de conditions privilégiées.</p>
 
@@ -152,6 +158,12 @@
                                                 Veuillez vous <a href="{{ route('login') }}" class="font-weight-bold text-danger">connecter</a> pour vous inscrire à cet événement.
                                             </div>
                                         @endauth
+                                    @else
+                                        <div class="text-center py-3">
+                                            <i class="fas fa-calendar-times fa-4x text-muted mb-3"></i>
+                                            <h4 class="font-weight-bold text-muted">Inscriptions closes</h4>
+                                            <p class="mb-0 text-muted">Désolé, les inscriptions pour cet événement ne sont plus possibles.</p>
+                                        </div>
                                     @endif
                                 </div>
                             </div>
@@ -195,10 +207,14 @@
                                         @endif
                                     </ul>
 
-                                    @if($event->status == 'open_registration' && !$event->isFull())
+                                    @if($event->canRegister() && !$isRegistered)
                                         <button class="theme-btn btn-style-one w-100 mb-3" onclick="$('#register-tab').tab('show')">
                                             <span class="btn-title"><i class="fas fa-user-plus mr-2"></i> M'inscrire maintenant</span>
                                         </button>
+                                    @elseif($event->isPast())
+                                        <div class="alert alert-dark text-center py-2 mb-3">
+                                            <small class="font-weight-bold text-uppercase">Événement Terminé</small>
+                                        </div>
                                     @elseif($event->isFull())
                                         <button class="btn btn-secondary w-100 mb-3" disabled>
                                             <i class="fas fa-ban mr-2"></i> Événement Complet

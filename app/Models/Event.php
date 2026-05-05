@@ -96,6 +96,24 @@ class Event extends Model
     }
 
     /**
+     * Vérifie si l'inscription est possible.
+     */
+    public function canRegister()
+    {
+        return $this->status === 'open_registration'
+            && $this->start_date->isFuture()
+            && !$this->isFull();
+    }
+
+    /**
+     * Vérifie si l'événement est passé.
+     */
+    public function isPast()
+    {
+        return $this->start_date->isPast();
+    }
+
+    /**
      * Vérifie si l'événement est complet.
      */
     public function isFull()
