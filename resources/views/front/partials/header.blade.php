@@ -121,6 +121,11 @@
                     <i class="fas fa-times text-danger"></i>
                 </div>
             </div>
+            <div class="mobile-close-btn-container d-lg-none text-center py-2" style="background: #f8f9fa;">
+                <button class="btn btn-sm btn-outline-danger close-mobile-overlay px-4 rounded-pill">
+                    <i class="fas fa-times mr-2"></i> Fermer le menu
+                </button>
+            </div>
             <div class="mobile-links-area p-4 text-center">
                 <ul class="list-unstyled mt-4">
                     <li class="mb-4 link-anim"><a href="/" class="h2 font-weight-light text-dark text-decoration-none">Accueil</a></li>
@@ -300,6 +305,14 @@
                     document.body.classList.remove('mobile-menu-active');
                 };
             }
+            // Fix for multiple close buttons
+            document.querySelectorAll('.close-mobile-overlay').forEach(btn => {
+                btn.onclick = (e) => {
+                    e.preventDefault();
+                    mm.classList.remove('is-open');
+                    document.body.classList.remove('mobile-menu-active');
+                };
+            });
         });
     </script>
 </header>

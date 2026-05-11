@@ -75,7 +75,15 @@
 <script src="{{asset('assets/admin/js/pace.min.js')}}"></script>
 
     <!--app-->
-<script src="{{asset('assets/admin/js/app.js')}}"></script>
+    <script src="{{asset('assets/admin/js/app.js')}}"></script>
+    <script>
+        $(function() {
+            // Fix for mobile toggle icon to close the menu
+            $(".sidebar-header .mobile-toggle-icon").on("click", function() {
+                $(".wrapper").removeClass("toggled");
+            });
+        });
+    </script>
 <script src="{{asset('assets/admin/js/index4.js')}}"></script>
 
 @yield('extra_js')

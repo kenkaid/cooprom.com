@@ -9,6 +9,9 @@
         </div>
         <div class="toggle-icon ms-auto"><i class="bi bi-chevron-double-left"></i>
         </div>
+        <div class="mobile-toggle-icon d-xl-none ms-auto" style="cursor: pointer; font-size: 22px;">
+            <i class="bi bi-x-lg"></i>
+        </div>
     </div>
     <!--navigation-->
     <ul class="metismenu" id="menu">
