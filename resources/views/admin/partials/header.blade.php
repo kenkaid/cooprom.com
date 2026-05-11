@@ -85,7 +85,7 @@
                 <li class="nav-item dropdown dropdown-large">
                     <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
                         <div class="user-setting d-flex align-items-center gap-1">
-                            <img src="{{ asset('assets/admin/images/user_default.jpg') }}" class="user-img" alt="">
+                            <img src="{{ asset('assets/admin/images/avatars/user-default.png') }}" class="user-img" alt="">
                             <div class="user-name d-none d-sm-block">Admin COOPROM</div>
                         </div>
                     </a>
@@ -93,7 +93,7 @@
                         <li>
                             <a class="dropdown-item" href="#">
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ asset('assets/admin/images/user_default.jpg') }}" alt="" class="rounded-circle" width="60" height="60">
+                                    <img src="{{ asset('assets/admin/images/avatars/user-default.png') }}" alt="" class="rounded-circle" width="60" height="60">
                                     <div class="ms-3">
                                         <h6 class="mb-0 dropdown-user-name">Admin COOPROM</h6>
                                         <small class="mb-0 dropdown-user-designation text-secondary">admin@cooprom.ci</small>
@@ -120,7 +120,7 @@
                         </li>
                         <li><hr class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault(); handleLogout('logout-form');">
                                 <div class="d-flex align-items-center">
                                     <div class="setting-icon"><i class="bi bi-lock-fill"></i></div>
                                     <div class="setting-text ms-3"><span>Déconnexion</span></div>

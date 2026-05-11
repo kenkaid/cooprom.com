@@ -15,6 +15,17 @@ class ProfileRepository
 
     public function getAllSectors()
     {
-        return CulturalSector::all();
+        $user = auth()->user();
+        $query = CulturalSector::query();
+
+        if ($user && $user->role_type) {
+            $query->where(function ($q) use ($user) {
+                $q->where('allowed_roles', 'LIKE', '%' . $user->role_type . '%')
+                  ->orWhereNull('allowed_roles')
+                  ->orWhere('allowed_roles', '');
+            });
+        }
+
+        return $query->get();
     }
 }

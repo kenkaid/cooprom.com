@@ -267,7 +267,7 @@
                                     <p class="mb-0 small text-muted">{{ $user->culturalSector->name ?? 'Secteur non défini' }}</p>
                                 </div>
                                 <div>
-                                    <a href="{{ route('admin.users.show', $user->uuid) }}" class="btn btn-sm btn-outline-secondary rounded-circle"><i class="bi bi-chevron-right"></i></a>
+                                    <a href="{{ route('admin.users.edit', $user->uuid) }}" class="btn btn-sm btn-outline-secondary rounded-circle"><i class="bi bi-chevron-right"></i></a>
                                 </div>
                             </div>
                         @empty

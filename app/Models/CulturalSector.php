@@ -12,6 +12,7 @@ class CulturalSector extends BaseModel
     protected $fillable = [
         'uuid',
         'name',
+        'allowed_roles',
         'description',
         't_name',
         'version',
@@ -23,5 +24,10 @@ class CulturalSector extends BaseModel
     public function users()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function attributes()
+    {
+        return $this->belongsToMany(Attribute::class, 'attribute_cultural_sector');
     }
 }

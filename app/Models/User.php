@@ -21,10 +21,22 @@ class User extends BaseModel
     protected $fillable = [
         'uuid',
         'cultural_sector_id',
+        'other_sector',
         'name',
         'last_name',
         'designation',
         'email',
+        'role_type',
+        'habitation_place',
+        'burida_number',
+        'cni_number',
+        'pseudonym',
+        'company_name',
+        'manager_name',
+        'registration_number_mc',
+        'implementation_place',
+        'cnps_number',
+        'profession',
         'address',
         'photo',
         'phone_number',
@@ -108,5 +120,10 @@ class User extends BaseModel
     public function events()
     {
         return $this->belongsToMany(Event::class)->withPivot('notes', 'status')->withTimestamps();
+    }
+
+    public function attributeValues()
+    {
+        return $this->morphMany(AttributeValue::class, 'attributable');
     }
 }

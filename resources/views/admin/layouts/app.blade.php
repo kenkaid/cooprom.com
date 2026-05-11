@@ -8,6 +8,8 @@
     <meta name="author" content=""/>
     <meta name="user-id" content="{{ auth()->id() }}">
     <title>@yield('title', 'Admin Dashboard - COOPROM')</title>
+    <!--favicon-->
+    <link rel="icon" href="{{asset('assets/admin/images/icons/favicon.ico')}}" type="image/x-icon">
     <!--plugins-->
     <link href="{{asset('/assets/admin/plugins/notifications/css/lobibox.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/admin/plugins/simplebar/css/simplebar.css')}}" rel="stylesheet"/>
@@ -77,6 +79,48 @@
 <script src="{{asset('assets/admin/js/index4.js')}}"></script>
 
 @yield('extra_js')
+
+<script>
+    // Handle Logout with 419 error check
+    function handleLogout(formId) {
+        const form = document.getElementById(formId);
+        if (!form) return;
+
+        const formData = new FormData(form);
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        }).then(response => {
+            if (response.status === 419) {
+                // Session expired, reload to get new token and then logout will work or user will be redirected to login
+                window.location.reload();
+            } else {
+                // Normal redirect after logout
+                window.location.href = '/admin/login';
+            }
+        }).catch(error => {
+            // On error, just try submitting the form normally
+            form.submit();
+        });
+    }
+
+    // Refresh CSRF token every 15 minutes to prevent 419 errors
+    setInterval(function() {
+        fetch('{{ route('refresh-csrf') }}')
+            .then(response => response.json())
+            .then(data => {
+                const tokens = document.querySelectorAll('input[name="_token"]');
+                tokens.forEach(token => token.value = data.token);
+
+                const meta = document.querySelector('meta[name="csrf-token"]');
+                if (meta) meta.setAttribute('content', data.token);
+            })
+            .catch(error => console.error('Error refreshing CSRF token:', error));
+    }, 15 * 60 * 1000); // 15 minutes
+</script>
 
 </body>
 </html>

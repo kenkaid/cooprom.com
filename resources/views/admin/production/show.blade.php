@@ -82,7 +82,7 @@
         <div class="card shadow-sm border-0">
             <div class="card-body text-center">
                 <h5 class="mb-3 text-start">Porteur du projet</h5>
-                <img src="{{ asset('storage/' . ($production->user->photo ?? '')) }}" class="rounded-circle shadow" width="120" height="120" alt="" onerror="this.src='{{ asset('assets/admin/images/avatars/avatar-1.png') }}'">
+                <img src="{{ $production->user->photo ?? asset('assets/admin/images/avatars/avatar-1.png') }}" class="rounded-circle shadow" width="120" height="120" alt="">
                 <h6 class="mb-0 mt-3">{{ $production->user->name ?? 'N/A' }} {{ $production->user->last_name ?? '' }}</h6>
                 <p class="text-muted small">{{ $production->user->email ?? '' }}</p>
                 <hr>
@@ -91,7 +91,7 @@
                     <p class="mb-1 text-muted small"><i class="bi bi-geo-alt me-2"></i>{{ $production->user->address ?? 'N/A' }}</p>
                     <p class="mb-0 text-muted small"><i class="bi bi-briefcase me-2"></i>{{ $production->user->culturalSector->name ?? 'N/A' }}</p>
                 </div>
-                <a href="{{ route('admin.users.show', $production->user->uuid ?? '') }}" class="btn btn-primary btn-sm radius-30 px-4 mt-3">Voir profil complet</a>
+                <a href="{{ route('admin.users.edit', $production->user->uuid ?? '') }}" class="btn btn-primary btn-sm radius-30 px-4 mt-3">Voir profil complet</a>
             </div>
         </div>
 

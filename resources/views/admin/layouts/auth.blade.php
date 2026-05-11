@@ -7,7 +7,7 @@
     <meta name="description" content=""/>
     <meta name="author" content=""/>
     <title>@yield('title', 'Connexion - COOPROM Admin')</title>
-    <link rel="icon" href="{{asset('assets/admin/images/favicon-32x32.png')}}" type="image/png"/>
+    <link rel="icon" href="{{asset('assets/admin/images/icons/favicon.ico')}}" type="image/x-icon"/>
     <!-- Bootstrap CSS -->
     <link href="{{asset('assets/admin/css/bootstrap.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/admin/css/bootstrap-extended.css')}}" rel="stylesheet"/>

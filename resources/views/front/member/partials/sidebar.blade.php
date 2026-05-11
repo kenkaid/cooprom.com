@@ -2,7 +2,7 @@
     <div class="inner-column bg-white shadow-sm p-0 rounded-lg overflow-hidden border">
         <div class="user-info text-center p-4 bg-light">
             <div class="image mb-3 position-relative d-inline-block">
-                <img src="{{ auth()->user()->photo }}"
+                <img src="{{ auth()->user()->photo ?: asset('assets/admin/images/avatars/user-default.png') }}"
                      class="rounded-circle border border-white shadow-sm"
                      style="width: 100px; height: 100px; object-fit: cover;" alt="Avatar">
                 <a href="{{ route('member.profile.edit') }}" class="btn btn-sm btn-light position-absolute rounded-circle shadow-sm" style="bottom: 0; right: 0; padding: 5px 8px;">
@@ -25,11 +25,13 @@
                         <i class="fa fa-user-circle mr-3"></i> Mon Profil
                     </a>
                 </li>
+                @if(auth()->user()->role_type === 'artiste')
                 <li class="nav-item mb-1">
                     <a class="nav-link {{ request()->routeIs('member.productions.*') ? 'active' : 'text-dark' }} d-flex align-items-center rounded px-3 py-2" href="{{ route('member.productions.index') }}">
                         <i class="fa fa-compact-disc mr-3"></i> Mes Productions
                     </a>
                 </li>
+                @endif
                 <li class="nav-item mb-1">
                     <a class="nav-link {{ request()->routeIs('member.contracts.*') ? 'active' : 'text-dark' }} d-flex align-items-center rounded px-3 py-2" href="{{ route('member.contracts.index') }}">
                         <i class="fa fa-file-signature mr-3"></i> Mes Contrats
@@ -52,11 +54,13 @@
                         </a>
                     </li>
                 @endif
+                @if(auth()->user()->role_type === 'artiste')
                 <li class="nav-item mb-1">
                     <a class="nav-link {{ request()->routeIs('member.social.*') ? 'active' : 'text-dark' }} d-flex align-items-center rounded px-3 py-2" href="{{ route('member.social.index') }}">
                         <i class="fa fa-hand-holding-heart mr-3"></i> Aide Sociale
                     </a>
                 </li>
+                @endif
                 <li class="nav-item mb-1">
                     <a class="nav-link {{ request()->routeIs('member.appointments.*') ? 'active' : 'text-dark' }} d-flex align-items-center rounded px-3 py-2" href="{{ route('member.appointments.index') }}">
                         <i class="fa fa-calendar-alt mr-3"></i> Mes Rendez-vous
@@ -72,9 +76,9 @@
                 </li>
 
                 <li class="nav-item mt-3 pt-3 border-top">
-                    <form action="{{ route('logout') }}" method="POST">
+                    <form id="sidebar-logout-form" action="{{ route('logout') }}" method="POST">
                         @csrf
-                        <button type="submit" class="btn btn-link text-danger nav-link d-flex align-items-center w-100 border-0 text-left px-3 py-2">
+                        <button type="button" onclick="handleLogout('sidebar-logout-form')" class="btn btn-link text-danger nav-link d-flex align-items-center w-100 border-0 text-left px-3 py-2">
                             <i class="fa fa-power-off mr-3"></i> Déconnexion
                         </button>
                     </form>

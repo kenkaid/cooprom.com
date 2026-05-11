@@ -38,6 +38,7 @@ use App\Http\Controllers\Front\Member\SocialAssistanceController as MemberSocial
 use App\Http\Controllers\Admin\AppointmentController as AdminAppointmentController;
 use App\Http\Controllers\Admin\NotificationController as AdminNotificationController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\Admin\AttributeController;
 
 
 Route::get('/', [HomeController::class,'index'])->name('home');
@@ -57,6 +58,9 @@ Route::post('/register', [RegisterController::class, 'register']);
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/refresh-csrf', function() {
+    return response()->json(['token' => csrf_token()]);
+})->name('refresh-csrf');
 
 // Réinitialisation de mot de passe
 Route::get('password/reset', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
@@ -192,6 +196,11 @@ Route::prefix('cp-admin-access')->name('admin.')->group(function () {
         // Secteurs Culturels
         Route::resource('cultural-sectors', CulturalSectorController::class)->parameters([
             'cultural-sectors' => 'uuid'
+        ]);
+
+        // Attributs Dynamiques (EAV)
+        Route::resource('attributes', AttributeController::class)->parameters([
+            'attributes' => 'uuid'
         ]);
 
         // Contrats

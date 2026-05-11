@@ -56,7 +56,7 @@
                     @auth
                         <div class="user-trigger dropdown">
                             <a href="#" class="dropdown-toggle no-caret" data-toggle="dropdown">
-                                <img src="{{ auth()->user()->photo }}" alt="User" class="avatar-circle">
+                                <img src="{{ auth()->user()->photo ?: asset('assets/admin/images/avatars/user-default.png') }}" alt="User" class="avatar-circle">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow-2xl border-0 mt-3 rounded-xl overflow-hidden">
                                 <div class="px-4 py-3 bg-light border-bottom">
@@ -66,8 +66,8 @@
                                 <a class="dropdown-item py-2 px-4 small" href="{{ route('member.dashboard') }}">Dashboard</a>
                                 <a class="dropdown-item py-2 px-4 small" href="{{ route('member.profile.edit') }}">Profil</a>
                                 <div class="dropdown-divider m-0"></div>
-                                <form action="{{ route('logout') }}" method="POST">@csrf
-                                    <button type="submit" class="dropdown-item py-2 px-4 small text-danger">Déconnexion</button>
+                                <form id="header-minimal-logout-form" action="{{ route('logout') }}" method="POST">@csrf
+                                    <button type="button" onclick="handleLogout('header-minimal-logout-form')" class="dropdown-item py-2 px-4 small text-danger border-0 bg-transparent w-100 text-left">Déconnexion</button>
                                 </form>
                             </div>
                         </div>

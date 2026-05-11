@@ -50,6 +50,7 @@
                             </div>
                         </div>
                     </div>
+                    @if(auth()->user()->role_type === 'artiste')
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 border-0 shadow-sm transition-hover">
                             <div class="card-body p-4">
@@ -64,6 +65,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 border-0 shadow-sm transition-hover">
                             <div class="card-body p-4">
@@ -88,6 +90,7 @@
                             </div>
                             <div class="card-body px-4 pb-4 pt-0">
                                 <div class="list-group list-group-flush">
+                                    @if(auth()->user()->role_type === 'artiste')
                                     <a href="{{ route('member.productions.create') }}" class="list-group-item list-group-item-action border-0 rounded mb-2 bg-light d-flex align-items-center p-3">
                                         <div class="mr-3 bg-white p-2 rounded shadow-sm text_orange">
                                             <i class="fa fa-plus-circle"></i>
@@ -98,6 +101,7 @@
                                         </div>
                                         <i class="fa fa-chevron-right ml-auto text-muted small"></i>
                                     </a>
+                                    @endif
                                     <a href="{{ route('member.travels.create_visa') }}" class="list-group-item list-group-item-action border-0 rounded mb-2 bg-light d-flex align-items-center p-3">
                                         <div class="mr-3 bg-white p-2 rounded shadow-sm text-info">
                                             <i class="fa fa-passport"></i>

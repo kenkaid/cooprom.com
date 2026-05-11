@@ -20,7 +20,8 @@ class ProfileController extends Controller
     {
         $user = auth()->user();
         $sectors = $this->service->getSectors();
-        return view('front.member.profile.edit', compact('user', 'sectors'));
+        $dynamicAttributes = $this->service->getAttributesForUser($user);
+        return view('front.member.profile.edit', compact('user', 'sectors', 'dynamicAttributes'));
     }
 
     public function update(ProfileRequest $request)

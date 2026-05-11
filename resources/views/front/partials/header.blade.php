@@ -52,7 +52,7 @@
                         </div>
                         <div class="user-profile-dropdown dropdown">
                             <a href="#" class="dropdown-toggle no-caret" data-toggle="dropdown">
-                                <img src="{{ auth()->user()->photo }}" alt="User" class="avatar-minimal">
+                                <img src="{{ auth()->user()->photo ?: asset('assets/admin/images/avatars/user-default.png') }}" alt="User" class="avatar-minimal">
                             </a>
                             <div class="dropdown-menu dropdown-menu-right shadow-2xl border-0 mt-3 rounded-xl overflow-hidden p-0">
                                 <div class="px-4 py-3 bg-light border-bottom">
@@ -66,9 +66,11 @@
                                     <a class="dropdown-item py-2 px-4 small {{ request()->routeIs('member.profile.edit') ? 'text-danger font-weight-bold' : '' }}" href="{{ route('member.profile.edit') }}">
                                         <i class="fas fa-user-circle mr-2 opacity-50"></i> Mon Profil
                                     </a>
+                                    @if(auth()->user()->role_type === 'artiste')
                                     <a class="dropdown-item py-2 px-4 small {{ request()->routeIs('member.productions.*') ? 'text-danger font-weight-bold' : '' }}" href="{{ route('member.productions.index') }}">
                                         <i class="fas fa-compact-disc mr-2 opacity-50"></i> Mes Productions
                                     </a>
+                                    @endif
                                     <a class="dropdown-item py-2 px-4 small {{ request()->routeIs('member.contracts.*') ? 'text-danger font-weight-bold' : '' }}" href="{{ route('member.contracts.index') }}">
                                         <i class="fas fa-file-signature mr-2 opacity-50"></i> Mes Contrats
                                     </a>
@@ -78,9 +80,11 @@
                                     <a class="dropdown-item py-2 px-4 small {{ request()->routeIs('member.travels.*') ? 'text-danger font-weight-bold' : '' }}" href="{{ route('member.travels.index') }}">
                                         <i class="fas fa-plane-departure mr-2 opacity-50"></i> Voyages & Visas
                                     </a>
+                                    @if(auth()->user()->role_type === 'artiste')
                                     <a class="dropdown-item py-2 px-4 small {{ request()->routeIs('member.social.*') ? 'text-danger font-weight-bold' : '' }}" href="{{ route('member.social.index') }}">
                                         <i class="fas fa-hand-holding-heart mr-2 opacity-50"></i> Aide Sociale
                                     </a>
+                                    @endif
                                     <a class="dropdown-item py-2 px-4 small {{ request()->routeIs('member.appointments.*') ? 'text-danger font-weight-bold' : '' }}" href="{{ route('member.appointments.index') }}">
                                         <i class="fas fa-calendar-alt mr-2 opacity-50"></i> Mes Rendez-vous
                                     </a>
@@ -92,8 +96,8 @@
                                     </a>
                                 </div>
                                 <div class="dropdown-divider m-0"></div>
-                                <form action="{{ route('logout') }}" method="POST">@csrf
-                                    <button type="submit" class="dropdown-item py-2 px-4 small text-danger border-0 bg-transparent w-100 text-left"><i class="fas fa-power-off mr-2"></i> Déconnexion</button>
+                                <form id="header-logout-form" action="{{ route('logout') }}" method="POST">@csrf
+                                    <button type="button" onclick="handleLogout('header-logout-form')" class="dropdown-item py-2 px-4 small text-danger border-0 bg-transparent w-100 text-left"><i class="fas fa-power-off mr-2"></i> Déconnexion</button>
                                 </form>
                             </div>
                         </div>
@@ -160,7 +164,7 @@
             <div class="mobile-auth-footer p-4 border-top mt-auto text-center">
                 @auth
                     <div class="d-flex align-items-center justify-content-center mb-4">
-                        <img src="{{ auth()->user()->photo }}" class="rounded-circle mr-3" width="50" height="50" style="object-fit: cover; border: 2px solid #ff3c36;">
+                        <img src="{{ auth()->user()->photo ?: asset('assets/admin/images/avatars/user-default.png') }}" class="rounded-circle mr-3" width="50" height="50" style="object-fit: cover; border: 2px solid #ff3c36;">
                         <div class="text-left">
                             <h6 class="font-weight-bold mb-0 text-dark">{{ auth()->user()->name }}</h6>
                             <small class="text-muted">Adhérent</small>
@@ -171,9 +175,11 @@
                         <a href="{{ route('member.profile.edit') }}" class="list-group-item list-group-item-action border-0 py-2 d-flex align-items-center {{ request()->routeIs('member.profile.edit') ? 'text-danger font-weight-bold' : '' }}">
                             <i class="fas fa-user-circle mr-3 opacity-50"></i> Profil
                         </a>
+                        @if(auth()->user()->role_type === 'artiste')
                         <a href="{{ route('member.productions.index') }}" class="list-group-item list-group-item-action border-0 py-2 d-flex align-items-center {{ request()->routeIs('member.productions.*') ? 'text-danger font-weight-bold' : '' }}">
                             <i class="fas fa-compact-disc mr-3 opacity-50"></i> Productions
                         </a>
+                        @endif
                         <a href="{{ route('member.contracts.index') }}" class="list-group-item list-group-item-action border-0 py-2 d-flex align-items-center {{ request()->routeIs('member.contracts.*') ? 'text-danger font-weight-bold' : '' }}">
                             <i class="fas fa-file-signature mr-3 opacity-50"></i> Contrats
                         </a>
@@ -183,9 +189,11 @@
                         <a href="{{ route('member.travels.index') }}" class="list-group-item list-group-item-action border-0 py-2 d-flex align-items-center {{ request()->routeIs('member.travels.*') ? 'text-danger font-weight-bold' : '' }}">
                             <i class="fas fa-plane-departure mr-3 opacity-50"></i> Voyages & Visas
                         </a>
+                        @if(auth()->user()->role_type === 'artiste')
                         <a href="{{ route('member.social.index') }}" class="list-group-item list-group-item-action border-0 py-2 d-flex align-items-center {{ request()->routeIs('member.social.*') ? 'text-danger font-weight-bold' : '' }}">
                             <i class="fas fa-hand-holding-heart mr-3 opacity-50"></i> Aide Sociale
                         </a>
+                        @endif
                         <a href="{{ route('member.appointments.index') }}" class="list-group-item list-group-item-action border-0 py-2 d-flex align-items-center {{ request()->routeIs('member.appointments.*') ? 'text-danger font-weight-bold' : '' }}">
                             <i class="fas fa-calendar-alt mr-3 opacity-50"></i> Rendez-vous
                         </a>
@@ -193,8 +201,8 @@
                             <i class="fas fa-bell mr-3 opacity-50"></i> Notifications
                         </a>
                     </div>
-                    <form action="{{ route('logout') }}" method="POST">@csrf
-                        <button type="submit" class="btn btn-link text-muted small border-0 bg-transparent">Déconnexion</button>
+                    <form id="mobile-logout-form" action="{{ route('logout') }}" method="POST">@csrf
+                        <button type="button" onclick="handleLogout('mobile-logout-form')" class="btn btn-link text-muted small border-0 bg-transparent">Déconnexion</button>
                     </form>
                 @else
                     <a href="{{ route('login') }}" class="btn btn-outline-dark btn-lg w-100 rounded-pill mb-3">Connexion</a>
