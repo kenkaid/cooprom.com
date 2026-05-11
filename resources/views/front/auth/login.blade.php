@@ -3,7 +3,7 @@
 @section('title', 'Connexion Adhérent - COOPROM')
 
 @section('content')
-    <section class="auth-section-creative d-flex align-items-center justify-content-center overflow-hidden" style="min-height: 95vh; background: #fcfcfc; padding: 100px 0;">
+    <section class="auth-section-creative d-flex align-items-center justify-content-center overflow-hidden" style="min-height: 95vh; background: #fcfcfc; padding: 10px 0;">
         <!-- Animated Background Decor -->
         <div class="auth-bg-shapes position-absolute w-100 h-100 overflow-hidden" style="z-index: 1; top:0; left:0;">
             <div class="shape-1 position-absolute bg-danger opacity-05 rounded-circle" style="width: 500px; height: 500px; top: -200px; left: -200px; filter: blur(80px);"></div>
