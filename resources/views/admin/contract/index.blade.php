@@ -91,7 +91,7 @@
                                 <td>
                                     @if($contract->user)
                                         <div class="d-flex align-items-center">
-                                            <img src="{{ asset('storage/' . $contract->user->photo) }}" class="rounded-circle" width="35" height="35" alt="" onerror="this.src='{{ asset('assets/admin/images/avatars/avatar-1.png') }}'">
+                                            <img src="{{ $contract->user->photo }}" class="rounded-circle" width="35" height="35" alt="">
                                             <div class="ms-2">
                                                 <small>{{ $contract->user->name }} {{ $contract->user->last_name }}</small>
                                             </div>

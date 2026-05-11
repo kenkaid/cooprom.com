@@ -99,7 +99,7 @@
                 window.location.reload();
             } else {
                 // Normal redirect after logout
-                window.location.href = '/admin/login';
+                window.location.href = '/';
             }
         }).catch(error => {
             // On error, just try submitting the form normally

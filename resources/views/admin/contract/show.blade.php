@@ -186,7 +186,7 @@
                     <h5 class="mb-3">Adhérent concerné</h5>
                     @if($contract->user)
                         <div class="text-center mb-3">
-                            <img src="{{ asset('storage/' . $contract->user->photo) }}" class="rounded-circle shadow" width="100" height="100" alt="" onerror="this.src='{{ asset('assets/admin/images/avatars/avatar-1.png') }}'">
+                            <img src="{{ $contract->user->photo }}" class="rounded-circle shadow" width="100" height="100" alt="">
                             <h6 class="mt-3 mb-0">{{ $contract->user->name }} {{ $contract->user->last_name }}</h6>
                             <p class="text-muted small">{{ $contract->user->culturalSector->name ?? 'Artiste' }}</p>
                         </div>

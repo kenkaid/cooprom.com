@@ -38,7 +38,7 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="{{ asset('storage/' . ($visa->user->photo ?? '')) }}" class="rounded-circle" width="40" height="40" alt="" onerror="this.src='{{ asset('assets/admin/images/avatars/avatar-1.png') }}'">
+                                <img src="{{ $visa->user->photo }}" class="rounded-circle" width="40" height="40" alt="">
                                 <div class="ms-2">
                                     <h6 class="mb-0 font-14">{{ $visa->user->name ?? 'Inconnu' }}</h6>
                                 </div>

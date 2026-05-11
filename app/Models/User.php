@@ -104,9 +104,13 @@ class User extends BaseModel
     public function getPhotoAttribute($value)
     {
         if ($value && !str_starts_with($value, 'http')) {
+            // Si c'est l'image par défaut, on la cherche dans assets
+            if ($value === 'user-default.png' || $value === 'user_default.jpg' || $value === 'user_default.png') {
+                return asset('assets/admin/images/avatars/user-default.png');
+            }
             return asset('storage/' . $value);
         }
-        return $value ?: asset('assets/admin/images/avatars/avatar-1.png'); // Image par défaut si vide
+        return $value ?: asset('assets/admin/images/avatars/user-default.png'); // Image par défaut si vide
     }
 
     public function visaApplications()

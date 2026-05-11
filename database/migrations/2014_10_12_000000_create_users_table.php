@@ -20,7 +20,7 @@ return new class extends Migration
                 $table->string('last_name');
                 $table->string('email')->unique();
                 $table->string('address')->nullable();
-                $table->string('photo')->default('user_default.jpg');
+                $table->string('photo')->default('user-default.png');
                 $table->string('phone_number');
                 $table->timestamp('email_verified_at')->nullable();
                 $table->string('password');

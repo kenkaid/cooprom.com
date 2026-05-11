@@ -21,7 +21,7 @@
         <div class="card shadow-sm border-0 h-100">
             <div class="card-body">
                 <div class="d-flex align-items-center mb-3">
-                    <img src="{{ asset('storage/' . ($production->user->photo ?? '')) }}" class="rounded-circle shadow-sm" width="45" height="45" alt="" onerror="this.src='{{ asset('assets/admin/images/avatars/avatar-1.png') }}'">
+                    <img src="{{ $production->user->photo }}" class="rounded-circle shadow-sm" width="45" height="45" alt="">
                     <div class="ms-2">
                         <h6 class="mb-0 font-14">{{ $production->user->name ?? 'N/A' }}</h6>
                         <small class="text-muted">{{ $production->user->culturalSector->name ?? 'Artiste' }}</small>

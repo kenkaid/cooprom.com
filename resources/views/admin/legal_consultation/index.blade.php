@@ -35,7 +35,7 @@
                         <td>
                             @if($consultation->user)
                                 <div class="d-flex align-items-center">
-                                    <img src="{{ asset('storage/' . $consultation->user->photo) }}" class="rounded-circle" width="44" height="44" alt="" onerror="this.src='{{ asset('assets/admin/images/avatars/avatar-1.png') }}'">
+                                    <img src="{{ $consultation->user->photo }}" class="rounded-circle" width="44" height="44" alt="">
                                     <div class="ms-2">
                                         <h6 class="mb-0">{{ $consultation->user->name }} {{ $consultation->user->last_name }}</h6>
                                     </div>

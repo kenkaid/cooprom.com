@@ -82,7 +82,7 @@
         <div class="card shadow-sm border-0">
             <div class="card-body text-center">
                 <h5 class="mb-3 text-start">Porteur du projet</h5>
-                <img src="{{ $production->user->photo ?? asset('assets/admin/images/avatars/avatar-1.png') }}" class="rounded-circle shadow" width="120" height="120" alt="">
+                <img src="{{ $production->user->photo }}" class="rounded-circle shadow" width="120" height="120" alt="">
                 <h6 class="mb-0 mt-3">{{ $production->user->name ?? 'N/A' }} {{ $production->user->last_name ?? '' }}</h6>
                 <p class="text-muted small">{{ $production->user->email ?? '' }}</p>
                 <hr>

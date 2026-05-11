@@ -43,7 +43,7 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="{{ $production->user->photo ?? asset('assets/admin/images/avatars/avatar-1.png') }}" class="rounded-circle" width="40" height="40" alt="">
+                                <img src="{{ $production->user->photo }}" class="rounded-circle" width="40" height="40" alt="">
                                 <div class="ms-2">
                                     <h6 class="mb-0 font-14">{{ $production->user->name ?? 'Inconnu' }} {{ $production->user->last_name ?? '' }}</h6>
                                 </div>

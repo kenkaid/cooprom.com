@@ -68,7 +68,7 @@
             <div class="card-body p-4">
                 <h6 class="mb-3">Artiste concerné</h6>
                 <div class="d-flex align-items-center mb-3">
-                    <img src="{{ asset('storage/' . $legalConsultation->user->photo) }}" class="rounded-circle" width="60" height="60" alt="" onerror="this.src='{{ asset('assets/admin/images/avatars/avatar-1.png') }}'">
+                    <img src="{{ $legalConsultation->user->photo }}" class="rounded-circle" width="60" height="60" alt="">
                     <div class="ms-3">
                         <h6 class="mb-0">{{ $legalConsultation->user->name }} {{ $legalConsultation->user->last_name }}</h6>
                         <p class="mb-0 small text-muted">{{ $legalConsultation->user->email }}</p>

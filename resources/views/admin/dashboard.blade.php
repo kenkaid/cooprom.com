@@ -223,7 +223,7 @@
                             <tbody>
                                 @forelse($stats['recent_contracts'] as $contract)
                                     <tr>
-                                        <td>{{ $contract->user->name }}</td>
+                                        <td>{{ $contract->user->name }} {{ $contract->user->last_name }}</td>
                                         <td>{{ Str::limit($contract->title, 25) }}</td>
                                         <td>
                                             @php
@@ -261,7 +261,7 @@
                     <div class="recent-members-list">
                         @forelse($stats['recent_users'] as $user)
                             <div class="d-flex align-items-center gap-3 p-3 border-bottom-dashed">
-                                <img src="{{ $user->photo }}" class="rounded-circle shadow-sm" width="50" height="50" alt="">
+                                <img src="{{ $user->photo }}" class="rounded-circle shadow-sm" width="50" height="50" alt="" onerror="this.src='{{ asset('assets/admin/images/avatars/user-default.png') }}'">
                                 <div class="flex-grow-1">
                                     <h6 class="mb-0 fw-bold">{{ $user->name }} {{ $user->last_name }}</h6>
                                     <p class="mb-0 small text-muted">{{ $user->culturalSector->name ?? 'Secteur non défini' }}</p>
