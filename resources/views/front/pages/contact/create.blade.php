@@ -48,7 +48,7 @@
                                 </div>
                                 <div>
                                     <span class="d-block small text-uppercase font-weight-bold text-danger">Téléphone</span>
-                                    <a href="tel:+2250102030405" class="font-weight-bold h5 text-dark">+225 01 02 03 04 05</a>
+                                    <a href="tel:+2250719116827" class="font-weight-bold h5 text-dark">+225 07 19 11 68 27</a>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                 </div>
                                 <div>
                                     <span class="d-block small text-uppercase font-weight-bold text-danger">Email</span>
-                                    <a href="mailto:contact@cooprom.ci" class="font-weight-bold h5 text-dark">contact@cooprom.ci</a>
+                                    <a href="mailto:contact@cooprom.org" class="font-weight-bold h5 text-dark">contact@cooprom.org</a>
                                 </div>
                             </div>
                         </div>
